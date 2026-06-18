@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>secure-personal-dashboard</title>
+  </head>
+  <body class="bg-slate-900 text-white antialiased">
+    <div class="app-container flex w-full min-h-screen overflow-x-hidden">
+      <div
+        class="sidebar-container hidden md:flex flex-col w-64 h-screen p-4 border-r border-slate-800 shrink-0"
+      >
+        <div class="logo-div flex gap-3 items-center mb-6">
+          <img
+            src="public/icons/secure-dashboard-logo.svg"
+            class="w-8 h-8"
+            alt="Logo"
+          />
+          <div class="text-container flex flex-col">
+            <span class="text-lg font-bold tracking-tight">SecureDash</span>
+            <span class="text-xs text-slate-400">Personal-Vault</span>
+          </div>
+        </div>
+
+        <nav class="flex flex-col gap-1">
+          <button
+            class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
+          >
+            <img src="public/icons/dashboard.svg" class="w-5 h-5" />
+            <span class="text-sm">Dashboard</span>
+          </button>
+          <button
+            class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
+          >
+            <img src="public/icons/notes.svg" class="w-5 h-5" />
+            <span class="text-sm">Notes</span>
+          </button>
+          <button
+            class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
+          >
+            <img src="public/icons/tasks.svg" class="w-5 h-5" />
+            <span class="text-sm">Tasks</span>
+          </button>
+          <button
+            class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
+          >
+            <img src="public/icons/wallet.svg" class="w-5 h-5" />
+            <span class="text-sm">Expenses</span>
+          </button>
+          <button
+            class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
+          >
+            <img src="public/icons/weather.svg" class="w-5 h-5" />
+            <span class="text-sm">Weather</span>
+          </button>
+          <button
+            class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
+          >
+            <img src="public/icons/passwords.svg" class="w-5 h-5" />
+            <span class="text-sm">Password Vault</span>
+          </button>
+          <button
+            class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
+          >
+            <img
+              src="public/icons/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (1).svg"
+              class="w-5 h-5"
+            />
+            <span class="text-sm">Profile</span>
+          </button>
+        </nav>
+
+        <button
+          class="flex gap-4 p-3 hover:bg-red-900/50 text-slate-400 hover:text-red-400 rounded-lg mt-auto transition cursor-pointer items-center"
+        >
+          <img src="public/icons/logout.svg" class="w-5 h-5" />
+          <span class="text-sm">Logout</span>
+        </button>
+      </div>
+
+      <!-- MAIN CONTENT CONTAINER -->
+
+      <div class="main-container flex-1 min-w-0 flex flex-col">
+        <!-- HEADER -->
+
+        <header
+          class="h-16 flex items-center justify-between px-2 sm:px-6 border-b border-slate-800 gap-2 sm:gap-4 w-full"
+        >
+          <!-- left side  -->
+          <div class="flex items-center gap-1.5 sm:gap-3 shrink-0 min-w-0">
+            <button
+              id="toggleBtn"
+              class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded cursor-pointer transition text-sm sm:text-base"
+            >
+              ☰
+            </button>
+            <div class="min-w-0">
+              <h2 class="text-sm sm:text-lg font-semibold truncate select-none">
+                Welcome back 👋
+              </h2>
+              <p
+                class="hidden xs:block text-[10px] sm:text-xs text-slate-400 truncate"
+              >
+                Today's overview
+              </p>
+            </div>
+          </div>
+
+          <!-- middle sectiom  -->
+          <div class="flex-1 max-w-xs sm:max-w-md mx-1 sm:mx-4 min-w-0">
+            <div class="relative w-full">
+              <img
+                src="public/icons/search.svg"
+                class="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-60 pointer-events-none"
+              />
+              <input
+                type="text"
+                placeholder="Search..."
+                class="w-full bg-slate-800/80 focus:bg-slate-800 pl-8 sm:pl-10 pr-3 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm outline-none border border-transparent focus:border-slate-700 transition"
+              />
+            </div>
+          </div>
+
+          <!-- right section  -->
+          <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+            <div
+              class="relative p-1 hover:bg-slate-800 rounded-full cursor-pointer transition"
+            >
+              <img
+                src="public/icons/bell.svg"
+                class="w-5 h-5 sm:w-6 sm:h-6"
+                alt="Notifications"
+              />
+
+              <span
+                class="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full"
+              ></span>
+            </div>
+
+            <img
+              src="public/icons/user.svg"
+              class="w-7 h-7 sm:w-9 sm:h-9 rounded-full cursor-pointer border border-slate-700 hover:border-slate-500 transition object-cover"
+              alt="Avatar"
+            />
+          </div>
+        </header>
+
+        <!--   Main container  -->
+        <main class=" flex-1 p-4 sm:p-6">
+          <!--  top container  stat cards -->
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
+          >
+            <!-- Notes -->
+            <div
+              class="flex justify-between items-center p-4 bg-slate-800 border border-slate-700 rounded-xl"
+            >
+              <div>
+                <h3 class="text-sm text-slate-400">Notes</h3>
+                <h4 class="text-2xl font-bold">0</h4>
+                <span class="text-xs text-slate-500">Total Notes</span>
+              </div>
+
+              <img src="public/icons/notes.svg" class="w-10 h-10" />
+            </div>
+
+            <!-- Tasks -->
+            <div
+              class="flex justify-between items-center p-4 bg-slate-800 border border-slate-700 rounded-xl"
+            >
+              <div>
+                <h3 class="text-sm text-slate-400">Tasks</h3>
+                <h4 class="text-2xl font-bold">0</h4>
+                <span class="text-xs text-slate-500">Pending Tasks</span>
+              </div>
+
+              <img src="public/icons/tasks.svg" class="w-10 h-10" />
+            </div>
+
+            <!-- Expenses -->
+            <div
+              class="flex justify-between items-center p-4 bg-slate-800 border border-slate-700 rounded-xl"
+            >
+              <div>
+                <h3 class="text-sm text-slate-400">Expenses</h3>
+                <h4 class="text-2xl font-bold">$0</h4>
+                <span class="text-xs text-slate-500">This Month</span>
+              </div>
+
+              <img src="public/icons/expenses.svg" class="w-10 h-10" />
+            </div>
+
+            <!-- Passwords -->
+            <div
+              class="flex justify-between items-center p-4 bg-slate-800 border border-slate-700 rounded-xl"
+            >
+              <div>
+                <h3 class="text-sm text-slate-400">Passwords</h3>
+                <h4 class="text-2xl font-bold">0</h4>
+                <span class="text-xs text-slate-500">Saved Items</span>
+              </div>
+
+              <img src="public/icons/passwords.svg" class="w-10 h-10" />
+            </div>
+          </div>
+          <!--  Middle stat Cards  -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- weather stat card  -->
+            <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
+              <h2 class="font-semibold">Weather Today</h2>
+            </div>
+
+            <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
+              <h2 class="font-semibold">Recent Tasks</h2>
+            </div>
+          </div>
+
+          <!-- bottom stat cards -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- notes stat card  -->
+            <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
+              <h2 class="font-semibold">Recent Notes</h2>
+            </div>
+
+            <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
+              <h2 class="font-semibold">Expenses Overview</h2>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

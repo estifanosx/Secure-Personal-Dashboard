@@ -1,0 +1,5 @@
+﻿<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="weather icon">
+  <g stroke="#67E8D4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 17h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 2.2A3 3 0 0 0 7 17Z"/><path d="M6 7V4"/><path d="M3.5 8.5 1.7 6.7"/><path d="M10.5 3.5 12.3 1.7"/>
+  </g>
+</svg>
