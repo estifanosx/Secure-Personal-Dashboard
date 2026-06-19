@@ -1,8 +1,10 @@
-
-
-
-const container = document.querySelector(".stat-cards");
+let storeTasks = [];
 export function renderTasks() {
+  const container = document.querySelector(".stat-cards");
+  if (!container) {
+    console.log("container is not found");
+    return;
+  }
   container.innerHTML = ` <div class="max-w-3xl mx-auto space-y-6">
     
     <div class="border-b border-slate-800 pb-4">
@@ -56,15 +58,48 @@ export function renderTasks() {
         </div>
     </div>
 
-    <div class="flex gap-2 border-b border-slate-800 pb-3">
-        <button class="bg-emerald-600 hover:bg-emerald-700 text-xs font-semibold px-4 py-2 rounded-md transition shadow">All</button>
-        <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Pending</button>
-        <button class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Completed</button>
+    <div class=" filter-Btn flex gap-2 border-b border-slate-800 pb-3">
+        <button data-filter ="all"
+         class="bg-emerald-600 hover:bg-emerald-700 text-xs font-semibold px-4 py-2 rounded-md transition shadow" >All</button>
+        <button  data-filter ="pending"
+        class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Pending</button>
+        <button  data-filter ="completed"
+        class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Completed</button>
     </div>
 
     <div id="js-task-list" class="space-y-3">
-        
-        <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 flex items-center justify-between gap-4 group hover:border-slate-600 transition">
+   
+</div>`;
+
+  const addtaskBtn = document.getElementById("add-task-btn");
+  const taskPriority = document.getElementById("task-priority");
+  const taskTitle = document.getElementById("task-title");
+  const taskDate = document.getElementById("task-date");
+
+  addtaskBtn.addEventListener("click", () => {
+    if (taskTitle.value.trim === "") {
+      console.warn("the title can't be empty ");
+      return;
+    }
+    let storenewTask = {
+      id: Date.now(),
+      title: taskTitle.value,
+      completed: false,
+      priority: taskPriority.value,
+      Date: taskDate.value || new Date().toISOString().split("T")[0],
+    };
+
+    storeTasks.push(storenewTask);
+
+    renderTaskList();
+  });
+}
+function renderTaskList() {
+  const taskListRender = document.getElementById("js-task-list");
+
+  taskListRender.innerHTML = storeTasks
+    .map((task) => {
+      return `  <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 flex items-center justify-between gap-4 group hover:border-slate-600 transition">
         
         <div class="flex items-center gap-4 min-w-0">
             <input 
@@ -72,14 +107,13 @@ export function renderTasks() {
             class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-emerald-600 focus:ring-emerald-500 focus:ring-offset-slate-900 cursor-pointer"
             />
             <div class="min-w-0">
-            <h4 class="text-sm font-medium text-slate-200 truncate">Complete project proposal</h4>
-            <span class="text-xs text-slate-400 block mt-0.5 font-mono">Due: Jun 15, 2026</span>
+            <h4 class="text-sm font-medium text-slate-200 truncate">${task.title}</h4>
+            <span class="text-xs text-slate-400 block mt-0.5 font-mono">${task.Date}</span>
             </div>
         </div>
-
         <div class="flex items-center gap-3 shrink-0">
             <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
-            Medium
+            ${task.priority}
             </span>
             
             <button class="text-slate-500 hover:text-red-400 p-1 rounded transition" title="Delete Task">
@@ -88,6 +122,7 @@ export function renderTasks() {
         </div>
 
         </div>
-        </div>
-</div>`;
+        </div> `;
+    })
+    .join("");
 }
