@@ -13,7 +13,7 @@
       >
         <div class="logo-div flex gap-3 items-center mb-6">
           <img
-            src="public/icons/secure-dashboard-logo.svg"
+            src="/icons/secure-dashboard-logo.svg"
             class="w-8 h-8"
             alt="Logo"
           />
@@ -25,46 +25,52 @@
 
         <nav class="flex flex-col gap-1">
           <button
+            data-page="Dashboard"
             class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
           >
-            <img src="public/icons/dashboard.svg" class="w-5 h-5" />
+            <img src="/icons/dashboard.svg" class="w-5 h-5" />
             <span class="text-sm">Dashboard</span>
           </button>
           <button
+            data-page="notes"
             class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
           >
-            <img src="public/icons/notes.svg" class="w-5 h-5" />
+            <img src="/icons/notes.svg" class="w-5 h-5" />
             <span class="text-sm">Notes</span>
           </button>
           <button
+            data-page="tasks"
             class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
           >
-            <img src="public/icons/tasks.svg" class="w-5 h-5" />
+            <img src="/icons/tasks.svg" class="w-5 h-5" />
             <span class="text-sm">Tasks</span>
           </button>
           <button
+            data-page="expenses"
             class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
           >
-            <img src="public/icons/wallet.svg" class="w-5 h-5" />
+            <img src="/icons/wallet.svg" class="w-5 h-5" />
             <span class="text-sm">Expenses</span>
           </button>
           <button
+            data-page="weather"
             class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
           >
-            <img src="public/icons/weather.svg" class="w-5 h-5" />
+            <img src="/icons/weather.svg" class="w-5 h-5" />
             <span class="text-sm">Weather</span>
           </button>
           <button
+            data-page="password vault"
             class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
           >
-            <img src="public/icons/passwords.svg" class="w-5 h-5" />
+            <img src="/icons/passwords.svg" class="w-5 h-5" />
             <span class="text-sm">Password Vault</span>
           </button>
           <button
             class="flex gap-4 p-3 hover:bg-slate-800 rounded-lg transition cursor-pointer items-center"
           >
             <img
-              src="public/icons/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (1).svg"
+              src="/icons/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 (1).svg"
               class="w-5 h-5"
             />
             <span class="text-sm">Profile</span>
@@ -111,7 +117,7 @@
           <div class="flex-1 max-w-xs sm:max-w-md mx-1 sm:mx-4 min-w-0">
             <div class="relative w-full">
               <img
-                src="public/icons/search.svg"
+                src="/icons/search.svg"
                 class="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-60 pointer-events-none"
               />
               <input
@@ -128,7 +134,7 @@
               class="relative p-1 hover:bg-slate-800 rounded-full cursor-pointer transition"
             >
               <img
-                src="public/icons/bell.svg"
+                src="/icons/bell.svg"
                 class="w-5 h-5 sm:w-6 sm:h-6"
                 alt="Notifications"
               />
@@ -139,7 +145,7 @@
             </div>
 
             <img
-              src="public/icons/user.svg"
+              src="/icons/user.svg"
               class="w-7 h-7 sm:w-9 sm:h-9 rounded-full cursor-pointer border border-slate-700 hover:border-slate-500 transition object-cover"
               alt="Avatar"
             />
@@ -147,7 +153,7 @@
         </header>
 
         <!--   Main container  -->
-        <main class=" flex-1 p-4 sm:p-6">
+        <main class="stat-cards flex-1 p-4 sm:p-6">
           <!--  top container  stat cards -->
 
           <div
@@ -155,15 +161,15 @@
           >
             <!-- Notes -->
             <div
-              class="flex justify-between items-center p-4 bg-slate-800 border border-slate-700 rounded-xl"
-            >
+              class="flex justify-between items-center p-4 bg-slate-800 border
+              border-slate-700 rounded-xl" >
               <div>
                 <h3 class="text-sm text-slate-400">Notes</h3>
                 <h4 class="text-2xl font-bold">0</h4>
                 <span class="text-xs text-slate-500">Total Notes</span>
               </div>
 
-              <img src="public/icons/notes.svg" class="w-10 h-10" />
+              <img src="/icons/notes.svg" class="w-10 h-10" />
             </div>
 
             <!-- Tasks -->
@@ -176,7 +182,7 @@
                 <span class="text-xs text-slate-500">Pending Tasks</span>
               </div>
 
-              <img src="public/icons/tasks.svg" class="w-10 h-10" />
+              <img src="/icons/tasks.svg" class="w-10 h-10" />
             </div>
 
             <!-- Expenses -->
@@ -189,7 +195,7 @@
                 <span class="text-xs text-slate-500">This Month</span>
               </div>
 
-              <img src="public/icons/expenses.svg" class="w-10 h-10" />
+              <img src="/icons/expenses.svg" class="w-10 h-10" />
             </div>
 
             <!-- Passwords -->
@@ -202,9 +208,10 @@
                 <span class="text-xs text-slate-500">Saved Items</span>
               </div>
 
-              <img src="public/icons/passwords.svg" class="w-10 h-10" />
+              <img src="/icons/passwords.svg" class="w-10 h-10" />
             </div>
           </div>
+        
           <!--  Middle stat Cards  -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <!-- weather stat card  -->

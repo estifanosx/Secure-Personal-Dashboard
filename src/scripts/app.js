@@ -1,3 +1,7 @@
+import {renderTasks} from "./tasks.js"
+
+
+// listineing the toggle bar
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("toggleBtn");
   const sidebar = document.querySelector(".sidebar-container");
@@ -13,4 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+// //
+
+document.querySelectorAll("button").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let loadPage = btn.dataset.page;
+    if (loadPage == "tasks") {
+      renderTasks();
+    }
+  });
 });
