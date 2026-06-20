@@ -1,4 +1,5 @@
 let storeTasks = [];
+let currentFilter = "all";
 export function renderTasks() {
   const container = document.querySelector(".stat-cards");
   if (!container) {
@@ -58,13 +59,13 @@ export function renderTasks() {
         </div>
     </div>
 
-    <div class=" filter-Btn flex gap-2 border-b border-slate-800 pb-3">
+    <div class="filter-Btn flex gap-2 border-b border-slate-800 pb-3">
         <button data-filter ="all"
-         class="bg-emerald-600 hover:bg-emerald-700 text-xs font-semibold px-4 py-2 rounded-md transition shadow" >All</button>
+         class="bg-slate-600 hover:bg-emerald-700 text-xs font-semibold px-4 py-2 rounded-md transition shadow" >All</button>
         <button  data-filter ="pending"
-        class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Pending</button>
+        class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Pending</button>
         <button  data-filter ="completed"
-        class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Completed</button>
+        class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Completed</button>
     </div>
 
     <div id="js-task-list" class="space-y-3">
@@ -77,7 +78,7 @@ export function renderTasks() {
   const taskDate = document.getElementById("task-date");
 
   addtaskBtn.addEventListener("click", () => {
-    if (taskTitle.value.trim === "") {
+    if (taskTitle.value.trim() === "") {
       console.warn("the title can't be empty ");
       return;
     }
@@ -92,18 +93,22 @@ export function renderTasks() {
     storeTasks.push(storenewTask);
 
     renderTaskList();
+      filterEvent();
   });
 }
 function renderTaskList() {
   const taskListRender = document.getElementById("js-task-list");
-
-  taskListRender.innerHTML = storeTasks
+  let tasksShowUp = filterTasks();
+  taskListRender.innerHTML = tasksShowUp
     .map((task) => {
       return `  <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 flex items-center justify-between gap-4 group hover:border-slate-600 transition">
         
         <div class="flex items-center gap-4 min-w-0">
             <input 
-            type="checkbox" 
+            type="checkbox"
+            data-id = "${task.id}" 
+              ${task.completed ? "checked" : ""}
+
             class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-emerald-600 focus:ring-emerald-500 focus:ring-offset-slate-900 cursor-pointer"
             />
             <div class="min-w-0">
@@ -125,4 +130,37 @@ function renderTaskList() {
         </div> `;
     })
     .join("");
+
+  document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      const check = Number(checkbox.dataset.id);
+      const tasks = storeTasks.find((task) => task.id === check);
+
+      if (tasks) {
+        tasks.completed = checkbox.checked;
+      }
+      renderTaskList();
+    
+    });
+  });
+}
+function filterEvent() {
+  document.querySelectorAll(".filter-Btn button").forEach((check) => {
+    check.addEventListener("click", () => {
+      currentFilter = check.dataset.filter;
+      renderTaskList();
+    });
+  });
+}
+
+function filterTasks() {
+  if (currentFilter === "pending") {
+    return storeTasks.filter((task) => !task.completed);
+  }
+
+  if (currentFilter === "completed") {
+    return storeTasks.filter((task) => task.completed);
+  }
+
+  return storeTasks;
 }
