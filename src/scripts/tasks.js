@@ -5,7 +5,7 @@ let currentFilter = "all";
 export function renderTasks() {
   const container = document.querySelector(".stat-cards");
   if (!container) {
-    console.log("container is not found");
+    window.alert("container is not found");
     return;
   }
   container.innerHTML = ` <div class="max-w-3xl mx-auto space-y-6">
@@ -63,7 +63,7 @@ export function renderTasks() {
 
     <div class="filter-Btn flex gap-2 border-b border-slate-800 pb-3">
         <button data-filter ="all"
-         class="bg-slate-600 hover:bg-emerald-700 text-xs font-semibold px-4 py-2 rounded-md transition shadow" >All</button>
+         class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition" >All</button>
         <button  data-filter ="pending"
         class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Pending</button>
         <button  data-filter ="completed"
@@ -128,7 +128,7 @@ function renderTaskList() {
             <button data-delete ="${task.id}"
              class="delete-Btn text-slate-500 hover:text-red-400 p-1 rounded transition" title="Delete Task">
           
-            <img src="/public/icons/delete.svg" class="hover:brightness-100  cursor-pointer">
+            <img src="/icons/delete.svg" class="hover:brightness-100  cursor-pointer">
             </button>
         </div>
 
