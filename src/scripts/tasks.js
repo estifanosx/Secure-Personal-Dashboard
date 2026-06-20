@@ -1,5 +1,7 @@
-let storeTasks = [];
+let storeTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let currentFilter = "all";
+
+//
 export function renderTasks() {
   const container = document.querySelector(".stat-cards");
   if (!container) {
@@ -22,7 +24,7 @@ export function renderTasks() {
             <input 
             id="task-title"
             type="text" 
-            placeholder="e.g., Complete project proposal" 
+            placeholder="e.g. Learn React " 
             class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition"
             />
         </div>
@@ -79,7 +81,7 @@ export function renderTasks() {
 
   addtaskBtn.addEventListener("click", () => {
     if (taskTitle.value.trim() === "") {
-      console.warn("the title can't be empty ");
+      window.alert("the title can't be empty ");
       return;
     }
     let storenewTask = {
@@ -93,8 +95,10 @@ export function renderTasks() {
     storeTasks.push(storenewTask);
 
     renderTaskList();
-      filterEvent();
   });
+
+  renderTaskList();
+  filterEvent();
 }
 function renderTaskList() {
   const taskListRender = document.getElementById("js-task-list");
@@ -121,8 +125,10 @@ function renderTaskList() {
             ${task.priority}
             </span>
             
-            <button class="text-slate-500 hover:text-red-400 p-1 rounded transition" title="Delete Task">
-            <span class="text-sm">🗑️s</span>
+            <button data-delete ="${task.id}"
+             class="delete-Btn text-slate-500 hover:text-red-400 p-1 rounded transition" title="Delete Task">
+          
+            <img src="/public/icons/delete.svg" class="hover:brightness-100  cursor-pointer">
             </button>
         </div>
 
@@ -131,6 +137,12 @@ function renderTaskList() {
     })
     .join("");
 
+  checkboxEvent();
+  deleteEvent();
+  savetoLocalStorage();
+}
+
+function checkboxEvent() {
   document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
       const check = Number(checkbox.dataset.id);
@@ -139,15 +151,17 @@ function renderTaskList() {
       if (tasks) {
         tasks.completed = checkbox.checked;
       }
+      savetoLocalStorage();
       renderTaskList();
-    
     });
   });
 }
+
 function filterEvent() {
   document.querySelectorAll(".filter-Btn button").forEach((check) => {
     check.addEventListener("click", () => {
       currentFilter = check.dataset.filter;
+
       renderTaskList();
     });
   });
@@ -163,4 +177,20 @@ function filterTasks() {
   }
 
   return storeTasks;
+}
+
+function deleteEvent() {
+  document.querySelectorAll(".delete-Btn").forEach((removeData) => {
+    removeData.addEventListener("click", () => {
+      const deleteItem = Number(removeData.dataset.delete);
+      storeTasks = storeTasks.filter((remainItem) => {
+        return remainItem.id !== deleteItem;
+      });
+      savetoLocalStorage();
+      renderTaskList();
+    });
+  });
+}
+function savetoLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(storeTasks));
 }
