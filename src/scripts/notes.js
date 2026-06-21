@@ -1,3 +1,4 @@
+const storeNotes = [];
 export function renderNotes() {
   const notesContainer = document.querySelector(".stat-cards");
   if (!notesContainer) {
@@ -24,7 +25,7 @@ export function renderNotes() {
             Create New Note
         </h2>
 
-        <!-- Title -->
+  
         <div class="flex flex-col gap-1.5">
             <label
                 for="notes-title"
@@ -61,7 +62,7 @@ export function renderNotes() {
       
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-            <!-- Date -->
+           
             <div class="flex flex-col gap-1.5">
                 <label
                     for="note-date"
@@ -79,8 +80,8 @@ export function renderNotes() {
 
            
             <div class="flex items-end">
-                <button
-                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-lg transition"
+                <button id="save-Btn"
+                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-lg transition cursor-pointer" 
                 >
                     Save
                 </button>
@@ -88,7 +89,7 @@ export function renderNotes() {
 
             
             <div class="flex items-end">
-                <button
+                <button  class="cancel-Btn"
                     class="w-full bg-slate-700 hover:bg-slate-600 text-red-400 font-semibold py-2 rounded-lg transition"
                 >
                     Cancel
@@ -124,7 +125,7 @@ export function renderNotes() {
 
         </div>
 
-        <!-- Right Side -->
+
         <div class="flex items-center gap-2 shrink-0">
 
           
@@ -139,7 +140,7 @@ export function renderNotes() {
                 >
             </button>
 
-            <!-- Delete -->
+         
             <button
              
                 class="delete-Btn p-2 rounded hover:bg-slate-700 transition"
@@ -158,3 +159,20 @@ export function renderNotes() {
 
 </div>`;
 }
+
+document.addEventListener("click", (e) => {
+  const saveTask = document.getElementById("save-Btn");
+  const notesTitle = document.getElementById("notes-title");
+  const notesContent = document.getElementById("note-content");
+  const noteDate = document.getElementById("note-date");
+
+  if (e.target === saveTask) {
+    const newNotes = {
+      id: Date.now(),
+      title: notesTitle.value,
+      content: notesContent.value,
+      Date: noteDate.value,
+    };
+    
+  }
+});
