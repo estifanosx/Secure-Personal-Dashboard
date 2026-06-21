@@ -33,28 +33,25 @@ export function renderNotesPage() {
                 <button id="save-Btn" type="button" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-lg transition cursor-pointer">Save</button>
             </div>
 
-            <div class="flex items-end">
-                <button id="cancel-Btn" type="button" class="w-full bg-slate-700 hover:bg-slate-600 text-red-400 font-semibold py-2 rounded-lg transition cursor-pointer">Cancel</button>
+            <div class="flex items-end  ">
+                <button type="button" class="cancel-Btn  w-full bg-slate-700 hover:bg-slate-600 text-red-400 font-semibold py-2 rounded-lg transition cursor-pointer">Cancel</button>
             </div>
         </div>
     </div>
 
-    <div class="js-note-container space-y-4 mt-6"></div>
-  
-
-`;
+<div class="js-note-container grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"></div>`;
 
   const saveNote = document.getElementById("save-Btn");
   const notesTitle = document.getElementById("notes-title");
   const notesContent = document.getElementById("note-content");
   const noteDate = document.getElementById("note-date");
-  const cancelBtn = document.getElementById("cancel-Btn");
 
   saveNote.addEventListener("click", () => {
     if (notesTitle.value.trim() === "") {
       window.alert("title is required");
       return;
     }
+
     const newNotes = {
       id: Date.now(),
       title: notesTitle.value,
@@ -62,70 +59,56 @@ export function renderNotesPage() {
       Date: noteDate.value || new Date().toISOString().split("T")[0],
     };
     storeNotes.push(newNotes);
-
     renderNotes();
   });
-
-  renderNotes();
 }
 function renderNotes() {
   const notesContainer = document.querySelector(".js-note-container");
 
-  notesContainer.innerHTML = storeNotes.map((notes) => {
-    return ` <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
-
-       
-        <div class="flex-1 ">
-
-            <span class="text-xs text-slate-400 font-mono">
-                ${notes.Date}
-            </span>
-
-       
-            <h4 class="text-sm font-semibold text-white mt-1 truncate">
-              ${notes.title}
-            </h4>
-
+  notesContainer.innerHTML = storeNotes
+    .map((notes) => {
+      return ` <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5 flex flex-col justify-between gap-5 hover:border-slate-600 transition-all duration-200 shadow-xl backdrop-blur-sm min-h-[200px]">
           
-            <p class="text-sm text-slate-300 mt-2 ">
-         ${notes.content}
-            </p>
+          <div class="space-y-2 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                      ${notes.Date}
+                  </span>
+              </div>
+              
+              <h4 class="text-base font-semibold text-white tracking-tight truncate">
+                  ${notes.title}
+              </h4>
+              
+              <p class="text-sm text-slate-300 whitespace-pre-wrap break-words leading-relaxed line-clamp-6">
+                  ${notes.content}
+              </p>
+          </div>
 
-        </div>
+          <div class="flex items-center justify-end gap-1.5 pt-3 border-t border-slate-700/50 shrink-0">
+              <button 
+                  data-edit="${notes.id}"
+                  class="edit-Btn p-2 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-slate-600 text-slate-400 hover:text-emerald-400 hover:bg-slate-700/30 transition cursor-pointer"
+                  title="Edit Note"
+              >
+                  <img src="/icons/edit.svg" class="w-4 h-4" alt="Edit">
+              </button>
 
+              <button 
+                  data-delete="${notes.id}"
+                  class="delete-Btn p-2 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-slate-600 text-slate-400 hover:text-red-400 hover:bg-slate-700/30 transition cursor-pointer"
+                  title="Delete Note"
+              >
+                  <img src="/icons/delete.svg" class="w-4 h-4" alt="Delete">
+              </button>
+          </div>
 
-        <div class="flex items-center gap-2 shrink-0">
-
-          
-            <button data-edit=${notes.id}
-             
-                class="edit-Btn p-2 rounded hover:bg-slate-700 transition"
-                title="Edit Note"
-            >
-                <img
-                    src="/icons/edit.svg"
-                    class="w-5 h-5"
-                >
-            </button>
-
-         
-            <button  data-delete =${notes.id}
-             
-                class="delete-Btn p-2 rounded hover:bg-slate-700 transition"
-                title="Delete Note"
-            >
-                <img
-                    src="/icons/delete.svg"
-                    class="w-5 h-5"
-                >
-            </button>
-
-        </div>
-
-`;
-  });
+        </div>`;
+    })
+    .join("");
 
   deleteItemEvent();
+  //   editItemEvent();
 }
 function deleteItemEvent() {
   document.querySelectorAll(".delete-Btn").forEach((deleteItem) => {
@@ -139,3 +122,4 @@ function deleteItemEvent() {
     });
   });
 }
+
