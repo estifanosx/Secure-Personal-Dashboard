@@ -70,7 +70,7 @@ export function renderTasks() {
         class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Completed</button>
     </div>
 
-    <div id="js-task-list" class="space-y-3">
+    <div id="js-task-list" class="space-y-3"> </div>
    
 </div>`;
 
