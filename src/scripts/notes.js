@@ -173,6 +173,7 @@ document.addEventListener("click", (e) => {
       content: notesContent.value,
       Date: noteDate.value,
     };
-    
+    storeNotes.push(newNotes)
+    console.log(storeNotes)
   }
 });
