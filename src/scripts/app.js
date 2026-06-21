@@ -1,6 +1,6 @@
 // import { Container } from "postcss";
 import { renderTasks } from "./tasks.js";
-import { renderNotes } from "./notes.js";
+import { renderNotesPage } from "./notes.js";
 
 // listineing the toggle bar
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,7 +28,7 @@ document.querySelectorAll("button").forEach((btn) => {
     if (loadPage == "tasks") {
       renderTasks();
     } else if (loadPage === "notes") {
-      renderNotes();
+      renderNotesPage();
     }
   });
 });

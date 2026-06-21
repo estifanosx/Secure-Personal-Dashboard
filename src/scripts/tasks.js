@@ -50,25 +50,25 @@ export function renderTasks() {
             </select>
         </div>
 
-        <div class="flex items-end">
-            <button 
-            id="add-task-btn"
-            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-2 px-4 rounded-lg transition shadow-md shadow-emerald-950/20"
-            >
-            Save Record
-            </button>
-        </div>
+              <div class="flex items-end">
+                  <button 
+                  id="add-task-btn"
+                  class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-2 px-4 rounded-lg transition shadow-md shadow-emerald-950/20"
+                  >
+                  Save Record
+                  </button>
+              </div>
         </div>
     </div>
 
-    <div class="filter-Btn flex gap-2 border-b border-slate-800 pb-3">
-        <button data-filter ="all"
-         class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition" >All</button>
-        <button  data-filter ="pending"
-        class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Pending</button>
-        <button  data-filter ="completed"
-        class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Completed</button>
-    </div>
+          <div class="filter-Btn flex gap-2 border-b border-slate-800 pb-3">
+              <button data-filter ="all"
+              class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition" >All</button>
+              <button  data-filter ="pending"
+              class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Pending</button>
+              <button  data-filter ="completed"
+              class="bg-slate-800 hover:bg-emerald-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition">Completed</button>
+          </div>
 
     <div id="js-task-list" class="space-y-3"> </div>
    
