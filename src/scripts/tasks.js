@@ -100,6 +100,8 @@ export function renderTasks() {
   renderTaskList();
   filterEvent();
 }
+
+
 function renderTaskList() {
   const taskListRender = document.getElementById("js-task-list");
   let tasksShowUp = filterTasks();

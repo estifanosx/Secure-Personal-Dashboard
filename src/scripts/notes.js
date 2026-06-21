@@ -8,7 +8,7 @@ export function renderNotes() {
   notesContainer.innerHTML = `<div class="max-w-3xl mx-auto space-y-6">
 
   
-    <div class="border-b border-slate-800 pb-4">
+     <div class="border-b border-slate-800 pb-4">
         <h1 class="text-2xl font-bold tracking-tight">
             Notes Vault
         </h1>
@@ -99,28 +99,58 @@ export function renderNotes() {
         </div>
 
     </div>
+
+
     <div class="js-note-container  bg-slate-800 border border-slate-700 rounded-xl p-4 hover:border-slate-600 transition  ">
 
    
 
-    <div class="flex justify-between items-start gap-4">
+   
+    </div>
+
+
+</div>`;
+}
+
+document.addEventListener("click", (e) => {
+  const saveTask = document.getElementById("save-Btn");
+  const notesTitle = document.getElementById("notes-title");
+  const notesContent = document.getElementById("note-content");
+  const noteDate = document.getElementById("note-date");
+
+  if (e.target === saveTask) {
+    const newNotes = {
+      id: Date.now(),
+      title: notesTitle.value,
+      content: notesContent.value,
+      Date: noteDate.value,
+    };
+    storeNotes.push(newNotes);
+  }
+});
+
+function renderNotes() {
+  const notesContainer = document.querySelectorAll();
+  let noteView = storeNotes;
+  notesContainer.innerHTML = notesView.map((notes) => {
+    return;
+    ` <div class="flex justify-between items-start gap-4">
 
        
         <div class="flex-1 ">
 
             <span class="text-xs text-slate-400 font-mono">
-                2026-06-20
+                ${notes.Date}
             </span>
 
        
             <h4 class="text-sm font-semibold text-white mt-1 truncate">
-                JavaScript DOM Notes
+              ${notes.title}
             </h4>
 
           
             <p class="text-sm text-slate-300 mt-2 ">
-                This is notes for event delegation, rendering,
-                and localStorage...
+         ${notes.content}
             </p>
 
         </div>
@@ -153,27 +183,6 @@ export function renderNotes() {
             </button>
 
         </div>
-
-    </div>
-
-
-</div>`;
+`;
+  });
 }
-
-document.addEventListener("click", (e) => {
-  const saveTask = document.getElementById("save-Btn");
-  const notesTitle = document.getElementById("notes-title");
-  const notesContent = document.getElementById("note-content");
-  const noteDate = document.getElementById("note-date");
-
-  if (e.target === saveTask) {
-    const newNotes = {
-      id: Date.now(),
-      title: notesTitle.value,
-      content: notesContent.value,
-      Date: noteDate.value,
-    };
-    storeNotes.push(newNotes)
-    console.log(storeNotes)
-  }
-});
