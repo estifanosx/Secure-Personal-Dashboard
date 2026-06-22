@@ -1,5 +1,9 @@
 export function renderexpensesPage() {
   const expensesContainer = document.querySelector(".stat-cards");
+  if (!expensesContainer) {
+    return;
+  }
+
   expensesContainer.innerHTML = ` <div class="min-h-screen bg-slate-900 text-white antialiased">
   <div class="mx-auto max-w-7xl p-4 sm:p-6 space-y-6">
     
@@ -9,8 +13,8 @@ export function renderexpensesPage() {
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-  
-        <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
+  <!--   total expense stat card  -->
+        <div  class="stat-cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
             <div class="flex items-center justify-between gap-4">
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Expenses</p>
                 <div class="rounded-lg bg-slate-900/60 border border-slate-700/50 p-2 text-sm">
@@ -22,8 +26,8 @@ export function renderexpensesPage() {
             </div>
             <p class="mt-4 text-2xl font-bold text-red-400">$0.00</p>
         </div>
-
-        <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
+<!--   average expense stat card -->
+        <div class="stat-cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
             <div class="flex items-center justify-between gap-4">
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Average Expense</p>
                 <div class="rounded-lg bg-slate-900/60 border border-slate-700/50 p-2 text-sm">
@@ -33,10 +37,10 @@ export function renderexpensesPage() {
 
                 </div>
             </div>
-            <p id="amount" class="mt-4 text-2xl font-bold text-blue-400">$0.00</p>
+            <p  class="mt-4 text-2xl font-bold text-blue-400">$0.00</p>
         </div>
-
-        <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
+<!--largest expense stat card  -->
+        <div class="stat-cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
             <div class="flex items-center justify-between gap-4">
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Largest Expense</p>
                 <div class="rounded-lg bg-slate-900/60 border border-slate-700/50 p-2 text-sm">
@@ -47,10 +51,10 @@ export function renderexpensesPage() {
                  
                  </div>
             </div>
-            <p id="amount" class="mt-4 text-2xl font-bold text-amber-400">$0.00</p>
+            <p  class="mt-4 text-2xl font-bold text-amber-400">$0.00</p>
         </div>
-
-        <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
+<!-- avilable pool stat cards -->
+        <div class="stat cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
             <div class="flex items-center justify-between gap-4">
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Available Pool</p>
                 <div class="rounded-lg bg-slate-900/60 border border-slate-700/50 p-2 text-sm">
@@ -62,54 +66,72 @@ export function renderexpensesPage() {
 
                 </div>
             </div>
-            <p id="amount" class="mt-4 text-2xl font-bold text-emerald-400">$0.00</p>
+            <p  class="mt-4 text-2xl font-bold text-emerald-400">$0.00</p>
         </div>
-        
+        <!--     -->
+
+
     </div>
 
+
+
+ <!--  form , graph and pie charts -->
+
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6"> 
-        
-        <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 space-y-4 h-fit">
-            <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider border-b border-slate-700/50 pb-2">
-                Log New Transaction
-            </h2>
-            
-            <div class="space-y-3">
-                <div class="flex flex-col gap-1.5">
-                    <label class="text-xs text-slate-400 font-medium">Category</label>
-                    <select class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition cursor-pointer"> 
-                        <option>Food</option>
-                        <option>Transport</option>
-                        <option>Shopping</option>
-                        <option>Bills</option>
-                    </select>
+
+
+
+        <!--  form container  --> 
+
+
+                <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 space-y-4 h-fit">
+                    <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider border-b border-slate-700/50 pb-2">
+                        Log New Transaction
+                    </h2>
+                    
+                    <div class="space-y-3">
+
+                        <div  class="flex flex-col gap-1.5">
+                            <label class="text-xs text-slate-400 font-medium">Category</label>
+                            <select id="category"  class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition cursor-pointer"> 
+                                <option>Food</option>
+                                <option>Transport</option>
+                                <option>Shopping</option>
+                                <option>Bills</option>
+                            </select>
+                        </div>
+
+                        <div  class="flex flex-col gap-1.5">
+                            <label class="text-xs text-slate-400 font-medium">Description</label>
+                            <input id="description"  type="text" placeholder="e.g. AWS Cloud Server Bill" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
+                        </div>
+
+                        <div  class="flex flex-col gap-1.5">
+                            <label class="text-xs text-slate-400 font-medium">Amount</label>
+                            <input id="amount"   type="number" placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
+                        </div>
+
+                        <div  class="flex flex-col gap-1.5">
+                            <label class="text-xs text-slate-400 font-medium">Transaction Date</label>
+                            <input id="date" type="date" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
+                        </div>
+
+                    </div>
+
+                    <div class="flex gap-3 pt-2">
+                        <button id="addExpense-Btn" type="button" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-lg text-sm transition cursor-pointer shadow-lg shadow-emerald-900/20">
+                            Add Expense
+                        </button>
+
+                        <button id="clearExpense-Btn" type="button" class="px-4 py-2 bg-red-600 hover:bg-slate-600 text-slate-300 font-semibold rounded-lg text-sm transition cursor-pointer">
+                            Clear
+                        </button>
+                    </div>
                 </div>
 
-                <div class="flex flex-col gap-1.5">
-                    <label class="text-xs text-slate-400 font-medium">Description</label>
-                    <input type="text" placeholder="e.g. AWS Cloud Server Bill" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
-                </div>
 
-                <div class="flex flex-col gap-1.5">
-                    <label class="text-xs text-slate-400 font-medium">Amount</label>
-                    <input type="number" placeholder="0.00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
-                </div>
+        <!-- Graph scontainer  -->
 
-                <div class="flex flex-col gap-1.5">
-                    <label class="text-xs text-slate-400 font-medium">Transaction Date</label>
-                    <input type="date" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 transition">
-                </div>
-            </div>
-
-            <div class="flex gap-3 pt-2">
-                <button type="button" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-lg text-sm transition cursor-pointer shadow-lg shadow-emerald-900/20">
-                    Add Expense
-                </button>
-                <button type="button" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold rounded-lg text-sm transition cursor-pointer">
-                    Clear
-                </button>
-            </div>
-        </div>
 
         <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             
@@ -134,7 +156,7 @@ export function renderexpensesPage() {
                                 <td class="py-3 text-red-400 font-semibold">-$12.00</td>
                                 <td class="py-3 text-right">
                                     <button class="text-xs font-semibold text-red-400 hover:bg-red-300 bg-red-500/10 hover:bg-red-500/20 px-2 py-1 rounded border border-red-500/20 transition cursor-pointer">
-                                  <img src="public/icons/delete.svg" class=" w-5" >
+                                  <img src="public/icons/delete.svg" class=" w-5">
                                     </button>
                                 </td>
                             </tr>
@@ -142,6 +164,10 @@ export function renderexpensesPage() {
                     </table>
                 </div>
             </div>
+
+            <!-- graph container  -->
+
+
 
             <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col">
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-700/50 pb-2">
@@ -161,7 +187,28 @@ export function renderexpensesPage() {
             </div>
 
         </div> </div> </div>
+
+        <!--  -->
 </div>
 
 `;
+  const addExpenseBtn = document.getElementById("addExpense-Btn");
+  const clearExpenseBtn = document.getElementById("clearExpense-Btn");
+  const date = document.getElementById("date");
+  const amount = document.getElementById("amount");
+  const description = document.getElementById("description");
+  const category = document.getElementById("category");
+
+  addExpenseBtn.addEventListener("click", () => {
+    console.log(date.value);
+    console.log(amount.value);
+    console.log(description.value);
+    console.log(category.value);
+  });
+
+  // function updateStatCards() {}
+
+  // function updateExpenseTable() {}
+
+  // function updatePieChart() {}
 }
