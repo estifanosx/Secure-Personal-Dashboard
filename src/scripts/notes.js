@@ -1,4 +1,6 @@
 let storeNotes = [];
+let currentEditingId = null;
+
 export function renderNotesPage() {
   const notesContainer = document.querySelector(".stat-cards");
   if (!notesContainer) {
@@ -42,9 +44,12 @@ export function renderNotesPage() {
 <div class="js-note-container grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"></div>`;
 
   const saveNote = document.getElementById("save-Btn");
+  const cancelNote = document.querySelector(".cancel-Btn");
   const notesTitle = document.getElementById("notes-title");
   const notesContent = document.getElementById("note-content");
   const noteDate = document.getElementById("note-date");
+
+//   noteDate.value = new Date().toISOString().split("T")[0];
 
   saveNote.addEventListener("click", () => {
     if (notesTitle.value.trim() === "") {
@@ -52,18 +57,60 @@ export function renderNotesPage() {
       return;
     }
 
-    const newNotes = {
-      id: Date.now(),
+    const noteData = {
       title: notesTitle.value,
       content: notesContent.value,
       Date: noteDate.value || new Date().toISOString().split("T")[0],
     };
-    storeNotes.push(newNotes);
+
+    if (currentEditingId !== null) {
+      const noteIndex = storeNotes.findIndex(
+        (item) => item.id === currentEditingId,
+      );
+
+        if (noteIndex !== -1) {
+            storeNotes[noteIndex] = {
+            ...storeNotes[noteIndex],
+            ...noteData,
+            };
+        } else {
+            storeNotes.push({
+            id: Date.now(),
+            ...noteData,
+            });
+        }
+    } else {
+      storeNotes.push({
+        id: Date.now(),
+        ...noteData,
+      });
+    }
+
+    currentEditingId = null;
+    saveNote.textContent = "Save";
+    notesTitle.value = "";
+    notesContent.value = "";
+    noteDate.value = new Date().toISOString().split("T")[0];
+
     renderNotes();
   });
+
+  cancelNote?.addEventListener("click", () => {
+    currentEditingId = null;
+    saveNote.textContent = "Save";
+    notesTitle.value = "";
+    notesContent.value = "";
+    noteDate.value = new Date().toISOString().split("T")[0];
+  });
+
+  renderNotes();
 }
+
 function renderNotes() {
   const notesContainer = document.querySelector(".js-note-container");
+  if (!notesContainer) {
+    return;
+  }
 
   notesContainer.innerHTML = storeNotes
     .map((notes) => {
@@ -108,8 +155,9 @@ function renderNotes() {
     .join("");
 
   deleteItemEvent();
-  //   editItemEvent();
+  editItemEvent();
 }
+
 function deleteItemEvent() {
   document.querySelectorAll(".delete-Btn").forEach((deleteItem) => {
     deleteItem.addEventListener("click", () => {
@@ -123,3 +171,23 @@ function deleteItemEvent() {
   });
 }
 
+function editItemEvent() {
+  document.querySelectorAll(".edit-Btn").forEach((edit) => {
+    edit.addEventListener("click", () => {
+      const checkEdit = Number(edit.dataset.edit);
+      const targetNotes = storeNotes.find((item) => item.id === checkEdit);
+
+      if (!targetNotes) {
+        return;
+      }
+
+      document.getElementById("notes-title").value = targetNotes.title;
+      document.getElementById("note-content").value = targetNotes.content;
+      document.getElementById("note-date").value = targetNotes.Date;
+
+      currentEditingId = checkEdit;
+      
+      document.getElementById("save-Btn").textContent = "Update Note";
+    });
+  });
+}
