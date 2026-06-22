@@ -1,3 +1,4 @@
+let storeExpenses =[]
 export function renderexpensesPage() {
   const expensesContainer = document.querySelector(".stat-cards");
   if (!expensesContainer) {
@@ -211,7 +212,8 @@ export function renderexpensesPage() {
       Date: date.value || new Date().toISOString().split("T")[0],
     };
 
-    console.log(expenseObject)
+    storeExpenses.push(expenseObject)
+    console.log(storeExpenses)
   });
 
   // function updateStatCards() {}
