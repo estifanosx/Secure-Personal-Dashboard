@@ -1,4 +1,4 @@
-let storeNotes = [];
+let storeNotes = JSON.parse(localStorage.getItem("notes")) || [];
 let currentEditingId = null;
 
 export function renderNotesPage() {
@@ -49,7 +49,7 @@ export function renderNotesPage() {
   const notesContent = document.getElementById("note-content");
   const noteDate = document.getElementById("note-date");
 
-//   noteDate.value = new Date().toISOString().split("T")[0];
+  //   noteDate.value = new Date().toISOString().split("T")[0];
 
   saveNote.addEventListener("click", () => {
     if (notesTitle.value.trim() === "") {
@@ -68,17 +68,17 @@ export function renderNotesPage() {
         (item) => item.id === currentEditingId,
       );
 
-        if (noteIndex !== -1) {
-            storeNotes[noteIndex] = {
-            ...storeNotes[noteIndex],
-            ...noteData,
-            };
-        } else {
-            storeNotes.push({
-            id: Date.now(),
-            ...noteData,
-            });
-        }
+      if (noteIndex !== -1) {
+        storeNotes[noteIndex] = {
+          ...storeNotes[noteIndex],
+          ...noteData,
+        };
+      } else {
+        storeNotes.push({
+          id: Date.now(),
+          ...noteData,
+        });
+      }
     } else {
       storeNotes.push({
         id: Date.now(),
@@ -93,6 +93,7 @@ export function renderNotesPage() {
     noteDate.value = new Date().toISOString().split("T")[0];
 
     renderNotes();
+    savetoLocalStorage();
   });
 
   cancelNote?.addEventListener("click", () => {
@@ -104,6 +105,7 @@ export function renderNotesPage() {
   });
 
   renderNotes();
+  savetoLocalStorage();
 }
 
 function renderNotes() {
@@ -156,6 +158,7 @@ function renderNotes() {
 
   deleteItemEvent();
   editItemEvent();
+  savetoLocalStorage();
 }
 
 function deleteItemEvent() {
@@ -167,6 +170,7 @@ function deleteItemEvent() {
         (remainItem) => remainItem.id !== removeData,
       );
       renderNotes();
+      savetoLocalStorage();
     });
   });
 }
@@ -186,8 +190,13 @@ function editItemEvent() {
       document.getElementById("note-date").value = targetNotes.Date;
 
       currentEditingId = checkEdit;
-      
+
       document.getElementById("save-Btn").textContent = "Update Note";
     });
+    savetoLocalStorage();
   });
+}
+
+function savetoLocalStorage() {
+  localStorage.setItem("notes", JSON.stringify(storeNotes));
 }
