@@ -1,4 +1,4 @@
-let storeExpenses =[]
+let storeExpenses = [];
 export function renderexpensesPage() {
   const expensesContainer = document.querySelector(".stat-cards");
   if (!expensesContainer) {
@@ -14,7 +14,9 @@ export function renderexpensesPage() {
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
   <!--   total expense stat card  -->
+
         <div  class="stat-cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
             <div class="flex items-center justify-between gap-4">
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Expenses</p>
@@ -25,9 +27,10 @@ export function renderexpensesPage() {
 
                 </div>
             </div>
-            <p class="mt-4 text-2xl font-bold text-red-400">$0.00</p>
+            <p id="total-expense-card" class="mt-4 text-2xl font-bold text-red-400">$0.00</p>
         </div>
 <!--   average expense stat card -->
+
         <div class="stat-cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
             <div class="flex items-center justify-between gap-4">
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Average Expense</p>
@@ -38,7 +41,7 @@ export function renderexpensesPage() {
 
                 </div>
             </div>
-            <p  class="mt-4 text-2xl font-bold text-blue-400">$0.00</p>
+            <p id="average-expense-card" class="mt-4 text-2xl font-bold text-blue-400">$0.00</p>
         </div>
 <!--largest expense stat card  -->
         <div class="stat-cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
@@ -52,7 +55,7 @@ export function renderexpensesPage() {
                  
                  </div>
             </div>
-            <p  class="mt-4 text-2xl font-bold text-amber-400">$0.00</p>
+            <p  id="largest-expense-card"class="mt-4 text-2xl font-bold text-amber-400">$0.00</p>
         </div>
 <!-- avilable pool stat cards -->
         <div class="stat cards rounded-xl bg-slate-800/50 border border-slate-700/60 p-4 flex flex-col justify-between hover:border-slate-600 transition duration-200">
@@ -67,9 +70,10 @@ export function renderexpensesPage() {
 
                 </div>
             </div>
-            <p  class="mt-4 text-2xl font-bold text-emerald-400">$0.00</p>
+            <p id="availabe-expense-card"  class="mt-4 text-2xl font-bold text-emerald-400">$0.00</p>
         </div>
         <!--     -->
+
 
 
     </div>
@@ -131,7 +135,7 @@ export function renderexpensesPage() {
                 </div>
 
 
-        <!-- Graph scontainer  -->
+        <!-- table container  -->
 
 
         <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -201,10 +205,7 @@ export function renderexpensesPage() {
   const category = document.getElementById("category");
 
   addExpenseBtn.addEventListener("click", () => {
-  
-
-
-  const  expenseObject = {
+    const expenseObject = {
       Id: Date.now(),
       Category: category.value,
       Descriptionn: description.value,
@@ -212,13 +213,18 @@ export function renderexpensesPage() {
       Date: date.value || new Date().toISOString().split("T")[0],
     };
 
-    storeExpenses.push(expenseObject)
-    console.log(storeExpenses)
+    storeExpenses.push(expenseObject);
   });
 
-  // function updateStatCards() {}
-
+updateStatCards();
   // function updateExpenseTable() {}
 
   // function updatePieChart() {}
+}
+
+function updateStatCards() {
+  document.getElementById("average-expense-card").textContent = "$20";
+  document.getElementById("largest-expense-card").textContent = "$20";
+  document.getElementById("availabe-expense-card").textContent = "$20";
+  document.getElementById("total-expense-card").textContent = "$20";
 }
