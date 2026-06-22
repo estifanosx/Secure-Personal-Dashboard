@@ -200,10 +200,18 @@ export function renderexpensesPage() {
   const category = document.getElementById("category");
 
   addExpenseBtn.addEventListener("click", () => {
-    console.log(date.value);
-    console.log(amount.value);
-    console.log(description.value);
-    console.log(category.value);
+  
+
+
+  const  expenseObject = {
+      Id: Date.now(),
+      Category: category.value,
+      Descriptionn: description.value,
+      Amount: amount.value,
+      Date: date.value || new Date().toISOString().split("T")[0],
+    };
+
+    console.log(expenseObject)
   });
 
   // function updateStatCards() {}
