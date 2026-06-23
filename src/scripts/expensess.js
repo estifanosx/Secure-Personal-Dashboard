@@ -206,33 +206,32 @@ export function renderexpensesPage() {
     };
 
     storeExpenses.push(expenseObject);
-     updateExpenseTable();
-     updateStatCards();
+    updateExpenseTable();
+    updateStatCards();
   });
-
-  
-
 
   // function updatePieChart() {}
 }
 
 function updateStatCards() {
+  let totalExpense = storeExpenses.reduce((accumulator, expense) => {
+    return accumulator + Number(expense.Amount);
+  }, 0);
 
-    let totalExpense = storeExpenses.reduce((accumulator, expense) => {
-      return accumulator + Number(expense.Amount);
-    }, 0); 
-  document.getElementById("average-expense-card").textContent = "$20";
+  let averageExpense = totalExpense /  storeExpenses.length
+
+  document.getElementById("average-expense-card").textContent = `${averageExpense}`;
   document.getElementById("largest-expense-card").textContent = "$20";
   document.getElementById("availabe-expense-card").textContent = "$20";
-  document.getElementById("total-expense-card").textContent = `${totalExpense}`
+  document.getElementById("total-expense-card").textContent = `${totalExpense}`;
 }
 
 function updateExpenseTable() {
   const renderTableBody = document.querySelector(".js-body-table");
-   
-  let totalExpense = storeExpenses.reduce((accumulator , expense) => {
-    return accumulator + Number(expense.Amount)
-  },0)
+
+  let totalExpense = storeExpenses.reduce((accumulator, expense) => {
+    return accumulator + Number(expense.Amount);
+  }, 0);
 
   renderTableBody.innerHTML = storeExpenses
     .map((table) => {
