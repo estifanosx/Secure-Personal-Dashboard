@@ -218,13 +218,13 @@ export function renderexpensesPage() {
 
 function updateStatCards() {
 
-    // let totalExpense = storeExpenses.reduce((accumulator, expense) => {
-    //   return accumulator + Number(expense.Amount);
-    // }, 0); 
+    let totalExpense = storeExpenses.reduce((accumulator, expense) => {
+      return accumulator + Number(expense.Amount);
+    }, 0); 
   document.getElementById("average-expense-card").textContent = "$20";
   document.getElementById("largest-expense-card").textContent = "$20";
   document.getElementById("availabe-expense-card").textContent = "$20";
-  document.getElementById("total-expense-card").textContent = ``
+  document.getElementById("total-expense-card").textContent = `${totalExpense}`
 }
 
 function updateExpenseTable() {
