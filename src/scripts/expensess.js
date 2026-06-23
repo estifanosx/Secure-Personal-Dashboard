@@ -218,10 +218,16 @@ function updateStatCards() {
     return accumulator + Number(expense.Amount);
   }, 0);
 
-  let averageExpense = totalExpense /  storeExpenses.length
+  let averageExpense = totalExpense / storeExpenses.length;
 
-  document.getElementById("average-expense-card").textContent = `${averageExpense}`;
-  document.getElementById("largest-expense-card").textContent = "$20";
+  const largestExpense = storeExpenses.reduce((largest, expense) => {
+    return Math.max(largest, Number(expense.Amount));
+  }, 0);
+
+  document.getElementById("average-expense-card").textContent =
+    `${averageExpense}`;
+  document.getElementById("largest-expense-card").textContent =
+    `${largestExpense}`;
   document.getElementById("availabe-expense-card").textContent = "$20";
   document.getElementById("total-expense-card").textContent = `${totalExpense}`;
 }
