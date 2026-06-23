@@ -1,3 +1,3 @@
 export function renderWeatherPage() {
-  document.querySelector(".stat-card").innerHTML = ` weather page is working `;
+  document.querySelector(".stat-cards").textContent = " weather page is working ";
 }
