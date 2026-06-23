@@ -1,4 +1,5 @@
 let storeExpenses = [];
+let startingBudget = 1000000000;
 export function renderexpensesPage() {
   const expensesContainer = document.querySelector(".stat-cards");
   if (!expensesContainer) {
@@ -233,10 +234,12 @@ function updateStatCards() {
     `${averageExpense}`;
   document.getElementById("largest-expense-card").textContent =
     `${largestExpense}`;
-  document.getElementById("availabe-expense-card").textContent = "$20";
-  document.getElementById("total-expense-card").textContent = `${totalExpense}`;
-}
 
+  document.getElementById("total-expense-card").textContent = `${totalExpense}`;
+  let availablePool = startingBudget - totalExpense;
+  document.getElementById("availabe-expense-card").textContent =
+    `${availablePool}`;
+}
 function updateExpenseTable() {
   const renderTableBody = document.querySelector(".js-body-table");
 
