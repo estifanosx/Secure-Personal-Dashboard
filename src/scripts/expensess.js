@@ -200,7 +200,7 @@ export function renderexpensesPage() {
     const expenseObject = {
       Id: Date.now(),
       Category: category.value,
-      Descriptionn: description.value,
+      Description: description.value,
       Amount: amount.value,
       Date: date.value || new Date().toISOString().split("T")[0],
     };
@@ -210,6 +210,11 @@ export function renderexpensesPage() {
     updateStatCards();
   });
 
+  clearExpenseBtn.addEventListener("click", () => {
+    (date.value || new Date().toISOString().split("T")[0],
+      (description.value = ""));
+    amount.value = "";
+  });
   // function updatePieChart() {}
 }
 
