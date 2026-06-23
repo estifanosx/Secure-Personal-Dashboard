@@ -138,9 +138,8 @@ export function renderexpensesPage() {
         <!-- table container  -->
 
 
-        <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col"> 
+        <div  lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col"> 
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-700/50 pb-2">
                     Expense History
                 </h2>
@@ -154,20 +153,13 @@ export function renderexpensesPage() {
                                 <th class="pb-3 font-medium text-right">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-800 text-sm">
-                            <tr class="hover:bg-slate-700/20 transition-colors">
-                                <td class="py-3 font-mono text-xs text-slate-400">2026-06-22</td>
-                                <td class="py-3 font-medium">Food</td>
-                                <td class="py-3 text-red-400 font-semibold">-$12.00</td>
-                                <td class="py-3 text-right">
-                                    <button class="text-xs font-semibold text-red-400 hover:bg-red-300 bg-red-500/10 hover:bg-red-500/20 px-2 py-1 rounded border border-red-500/20 transition cursor-pointer">
-                                  <img src="public/icons/delete.svg" class=" w-5">
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody class="js-body-table divide-y divide-slate-800 text-sm">
+                           
                         </tbody>
                     </table>
                 </div>
+            
+            
             </div>
 
             <!-- graph container  -->
@@ -214,10 +206,11 @@ export function renderexpensesPage() {
     };
 
     storeExpenses.push(expenseObject);
+     updateExpenseTable();
+     updateStatCards();
   });
+ 
 
-updateStatCards();
-  // function updateExpenseTable() {}
 
   // function updatePieChart() {}
 }
@@ -227,4 +220,22 @@ function updateStatCards() {
   document.getElementById("largest-expense-card").textContent = "$20";
   document.getElementById("availabe-expense-card").textContent = "$20";
   document.getElementById("total-expense-card").textContent = "$20";
+}
+
+function updateExpenseTable() {
+  const renderTableBody = document.querySelector(".js-body-table");
+  renderTableBody.innerHTML = storeExpenses
+    .map((table) => {
+      return `   <tr class="hover:bg-slate-700/20 transition-colors">
+                         <td class="py-3 font-mono text-xs text-slate-400">${table.Date}</td>
+                           <td class="py-3 font-medium">${table.Category}</td>
+                             <td class="py-3 text-red-400 font-semibold">${Number(table.Amount)}</td>
+                                <td class="py-3 text-right">
+                                    <button class="text-xs font-semibold text-red-400 hover:bg-red-300 bg-red-500/10 hover:bg-red-500/20 px-2 py-1 rounded border border-red-500/20 transition cursor-pointer">
+                                  <img src="public/icons/delete.svg" class=" w-5">
+                                    </button>
+                                </td>
+             </tr>`;
+    })
+    .join("");
 }
