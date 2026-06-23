@@ -1,5 +1,5 @@
 let storeExpenses = JSON.parse(localStorage.getItem("expense")) || [];
-let startingBudget = 1000000000;
+let startingBudget = 100000
 export function renderexpensesPage() {
   const expensesContainer = document.querySelector(".stat-cards");
   if (!expensesContainer) {
@@ -275,4 +275,73 @@ function deleteExpense() {
 
 function savetoLocalStorage() {
   localStorage.setItem("expense", JSON.stringify(storeExpenses));
+}
+
+function getCategoryTotals() {
+  return storeExpenses.reduce((accumulator, expense) => {
+    const cat = expense.Category;
+    const amt = Number(expense.Amount) || 0;
+    accumulator[cat] = (accumulator[cat] || 0) + amt;
+    return accumulator;
+  }, {});
+}
+
+function updatePieChart() {
+  const totals = getCategoryTotals();
+  const grandTotal = Object.values(totals).reduce(
+    (sum, value) => sum + value,
+    0,
+  );
+
+  // Cleaned Selector Architecture Hook
+  const chartContainer = document.querySelector(".js-chart-container");
+  if (!chartContainer) return;
+
+  if (grandTotal === 0) {
+    chartContainer.innerHTML = `<p class="text-xs text-slate-400">No transaction data footprint found.</p>`;
+    return;
+  }
+
+  const colors = {
+    Food: "#ef4444",
+    Transport: "#3b82f6",
+    Shopping: "#f59e0b",
+    Bills: "#10b981",
+  };
+
+  let cumulativePercentage = 0;
+  const gradientSlices = [];
+
+  for (const category in totals) {
+    const amount = totals[category];
+    const percentage = (amount / grandTotal) * 100;
+    const nextPercentage = cumulativePercentage + percentage;
+    const color = colors[category] || "#64748b";
+
+    gradientSlices.push(`${color} ${cumulativePercentage}% ${nextPercentage}%`);
+    cumulativePercentage = nextPercentage;
+  }
+
+  const gradientString = gradientSlices.join(", ");
+
+  chartContainer.innerHTML = `
+    <div class="flex flex-col items-center gap-4 w-full">
+      <div class="w-32 h-32 rounded-full border border-slate-700/40 shadow-xl" 
+           style="background: conic-gradient(${gradientString})">
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs max-w-[240px]">
+        ${Object.keys(totals)
+          .map(
+            (category) => `
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${colors[category] || "#64748b"}"></span>
+              <span class="text-slate-400 font-medium">${category}:</span>
+              <span class="text-slate-200 font-semibold">${((totals[category] / grandTotal) * 100).toFixed(0)}%</span>
+            </div>
+          `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
 }
