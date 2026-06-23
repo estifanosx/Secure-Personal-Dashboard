@@ -209,27 +209,37 @@ export function renderexpensesPage() {
      updateExpenseTable();
      updateStatCards();
   });
- 
+
+  
 
 
   // function updatePieChart() {}
 }
 
 function updateStatCards() {
+
+    // let totalExpense = storeExpenses.reduce((accumulator, expense) => {
+    //   return accumulator + Number(expense.Amount);
+    // }, 0); 
   document.getElementById("average-expense-card").textContent = "$20";
   document.getElementById("largest-expense-card").textContent = "$20";
   document.getElementById("availabe-expense-card").textContent = "$20";
-  document.getElementById("total-expense-card").textContent = "$20";
+  document.getElementById("total-expense-card").textContent = ``
 }
 
 function updateExpenseTable() {
   const renderTableBody = document.querySelector(".js-body-table");
+   
+  let totalExpense = storeExpenses.reduce((accumulator , expense) => {
+    return accumulator + Number(expense.Amount)
+  },0)
+
   renderTableBody.innerHTML = storeExpenses
     .map((table) => {
       return `   <tr class="hover:bg-slate-700/20 transition-colors">
                          <td class="py-3 font-mono text-xs text-slate-400">${table.Date}</td>
                            <td class="py-3 font-medium">${table.Category}</td>
-                             <td class="py-3 text-red-400 font-semibold">${Number(table.Amount)}</td>
+                             <td class="py-3 text-red-400 font-semibold">${table.Amount}</td>
                                 <td class="py-3 text-right">
                                     <button class="text-xs font-semibold text-red-400 hover:bg-red-300 bg-red-500/10 hover:bg-red-500/20 px-2 py-1 rounded border border-red-500/20 transition cursor-pointer">
                                   <img src="public/icons/delete.svg" class=" w-5">
