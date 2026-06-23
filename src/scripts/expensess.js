@@ -1,4 +1,4 @@
-let storeExpenses = [];
+let storeExpenses = JSON.parse(localStorage.getItem("expense")) || [];
 let startingBudget = 1000000000;
 export function renderexpensesPage() {
   const expensesContainer = document.querySelector(".stat-cards");
@@ -189,7 +189,9 @@ export function renderexpensesPage() {
         <!--  -->
 </div>
 
+
 `;
+  
   const addExpenseBtn = document.getElementById("addExpense-Btn");
   const clearExpenseBtn = document.getElementById("clearExpense-Btn");
   const date = document.getElementById("date");
@@ -216,8 +218,10 @@ export function renderexpensesPage() {
       (description.value = ""));
     amount.value = "";
   });
+  savetoLocalStorage();
   // function updatePieChart() {}
 }
+
 
 function updateStatCards() {
   let totalExpense = storeExpenses.reduce((accumulator, expense) => {
@@ -264,6 +268,7 @@ function updateExpenseTable() {
     })
     .join("");
   deleteExpense();
+  
 }
 
 function deleteExpense() {
@@ -271,9 +276,12 @@ function deleteExpense() {
     deleteItem.addEventListener("click", () => {
       const removedata = Number(deleteItem.dataset.delete);
       storeExpenses = storeExpenses.filter((item) => removedata !== item.Id);
-          updateExpenseTable();
-          updateStatCards();
+      updateExpenseTable();
+      updateStatCards();
     });
-
   });
+}
+
+function savetoLocalStorage() {
+  localStorage.setItem("expense", JSON.stringify(storeExpenses));
 }
