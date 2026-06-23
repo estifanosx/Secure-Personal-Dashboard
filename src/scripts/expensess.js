@@ -225,7 +225,7 @@ function updateStatCards() {
   }, 0);
 
   document.getElementById("average-expense-card").textContent =
-    `${averageExpense}`;
+    `${averageExpense.toFixed(2)}`;
   document.getElementById("largest-expense-card").textContent =
     `${largestExpense}`;
 

@@ -2,6 +2,7 @@
 import { renderTasks } from "./tasks.js";
 import { renderNotesPage } from "./notes.js";
 import { renderexpensesPage } from "./expensess.js";
+import { renderWeatherPage } from "./weather.js"
 
 // listineing the toggle bar
 document.addEventListener("DOMContentLoaded", () => {
@@ -32,6 +33,9 @@ document.querySelectorAll("button").forEach((btn) => {
       renderNotesPage();
     } else if (loadPage === "expenses") {
       renderexpensesPage();
+    }
+    else if (loadPage === "weather") {
+      renderWeatherPage();
     }
   });
 });
