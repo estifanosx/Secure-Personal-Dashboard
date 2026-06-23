@@ -165,16 +165,11 @@ export function renderexpensesPage() {
 
             <!-- graph container  -->
 
- <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col">
-                <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-700/50 pb-2">
-                    Expense Breakdown
-                </h2>
-                <div class="flex-1 flex flex-col items-center justify-center min-h-[220px] bg-slate-900/40 border border-dashed border-slate-700 rounded-lg p-4 text-center">
-                    <p class="text-xs text-slate-400 max-w-[200px] leading-relaxed">
-                      
-                    </p>
-                </div>
-            </div>
+       <div class="rounded-xl bg-slate-800/50 border         border-slate-700/60 p-5 flex flex-col">
+                  <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-700/50 pb-2">Expense Breakdown</h2>
+                  <div class="js-chart-container flex-1 flex flex-col items-center justify-center min-h-[220px] bg-slate-900/40 border border-dashed border-slate-700 rounded-lg p-4 text-center"> Coming soon
+                      </div>
+              </div>
 
            
 
@@ -205,6 +200,7 @@ export function renderexpensesPage() {
     storeExpenses.push(expenseObject);
     updateExpenseTable();
     updateStatCards();
+    savetoLocalStorage();
   });
 
   clearExpenseBtn.addEventListener("click", () => {
@@ -212,8 +208,9 @@ export function renderexpensesPage() {
       (description.value = ""));
     amount.value = "";
   });
-  savetoLocalStorage();
-  // function updatePieChart() {}
+
+  updateExpenseTable();
+  updateStatCards();
 }
 
 function updateStatCards() {
@@ -261,6 +258,7 @@ function updateExpenseTable() {
     })
     .join("");
   deleteExpense();
+  updatePieChart();
 }
 
 function deleteExpense() {
