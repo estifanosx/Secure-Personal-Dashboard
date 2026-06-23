@@ -139,7 +139,7 @@ export function renderexpensesPage() {
         <!-- table container  -->
 
 
-        <div  lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class " lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col"> 
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-700/50 pb-2">
                     Expense History
@@ -173,7 +173,7 @@ export function renderexpensesPage() {
                 </h2>
                 
                 <div class="flex-1 flex flex-col items-center justify-center min-h-[220px] bg-slate-900/40 border border-dashed border-slate-700 rounded-lg p-4 text-center">
-                    <d!v> 
+                    <div> 
             
                     
               
@@ -254,11 +254,26 @@ function updateExpenseTable() {
                            <td class="py-3 font-medium">${table.Category}</td>
                              <td class="py-3 text-red-400 font-semibold">${table.Amount}</td>
                                 <td class="py-3 text-right">
-                                    <button class="text-xs font-semibold text-red-400 hover:bg-red-300 bg-red-500/10 hover:bg-red-500/20 px-2 py-1 rounded border border-red-500/20 transition cursor-pointer">
-                                  <img src="public/icons/delete.svg" class=" w-5">
+                                    <button data-delete="${table.Id}" 
+                                    class="delete-icon text-xs font-semibold hover:bg-red-300  hover:bg-red-500/20 px-2 py-1 rounded border border-red-500/20 transition cursor-pointer">
+                                  <img src="
+                                  /icons/delete.svg" class=" w-5">
                                     </button>
                                 </td>
              </tr>`;
     })
     .join("");
+  deleteExpense();
+}
+
+function deleteExpense() {
+  document.querySelectorAll(".delete-icon").forEach((deleteItem) => {
+    deleteItem.addEventListener("click", () => {
+      const removedata = Number(deleteItem.dataset.delete);
+      storeExpenses = storeExpenses.filter((item) => removedata !== item.Id);
+          updateExpenseTable();
+          updateStatCards();
+    });
+
+  });
 }
