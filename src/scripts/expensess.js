@@ -139,7 +139,7 @@ export function renderexpensesPage() {
         <!-- table container  -->
 
 
-        <div class " lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class = " lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col"> 
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-700/50 pb-2">
                     Expense History
@@ -165,24 +165,18 @@ export function renderexpensesPage() {
 
             <!-- graph container  -->
 
-
-
-            <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col">
+ <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-5 flex flex-col">
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4 border-b border-slate-700/50 pb-2">
                     Expense Breakdown
                 </h2>
-                
                 <div class="flex-1 flex flex-col items-center justify-center min-h-[220px] bg-slate-900/40 border border-dashed border-slate-700 rounded-lg p-4 text-center">
-                    <div> 
-            
-                    
-              
-                    </div>
                     <p class="text-xs text-slate-400 max-w-[200px] leading-relaxed">
-                  
+                      
                     </p>
                 </div>
             </div>
+
+           
 
         </div> </div> </div>
 
@@ -191,7 +185,7 @@ export function renderexpensesPage() {
 
 
 `;
-  
+
   const addExpenseBtn = document.getElementById("addExpense-Btn");
   const clearExpenseBtn = document.getElementById("clearExpense-Btn");
   const date = document.getElementById("date");
@@ -221,7 +215,6 @@ export function renderexpensesPage() {
   savetoLocalStorage();
   // function updatePieChart() {}
 }
-
 
 function updateStatCards() {
   let totalExpense = storeExpenses.reduce((accumulator, expense) => {
@@ -268,7 +261,6 @@ function updateExpenseTable() {
     })
     .join("");
   deleteExpense();
-  
 }
 
 function deleteExpense() {
@@ -278,6 +270,7 @@ function deleteExpense() {
       storeExpenses = storeExpenses.filter((item) => removedata !== item.Id);
       updateExpenseTable();
       updateStatCards();
+      savetoLocalStorage();
     });
   });
 }
