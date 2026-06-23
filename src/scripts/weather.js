@@ -1,13 +1,15 @@
 export function renderWeatherPage() {
-  const Container = document.querySelector(".stat-cards");
+  // FIX 1: Mount directly to the unified root app shell container
+  const container = document.querySelector(".stat-cards");
 
-  Container.innerHTML = `
-<div class="min-h-screen bg-slate-900 text-white antialiased">
+
+  container.innerHTML = `
+  <div class="min-h-screen bg-slate-900 text-white antialiased">
     <div class="mx-auto max-w-7xl p-4 sm:p-6 space-y-6">
       
       <div class="flex flex-col gap-1 border-b border-slate-800 pb-4"> 
          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Weather Dashboard</h1>
-         <p class="text-xs text-slate-400"> Monitor current conditions and upcoming forecasts in real time</p>
+         <p class="text-xs text-slate-400">Monitor current conditions and upcoming forecasts in real time</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -41,26 +43,79 @@ export function renderWeatherPage() {
         <div class="lg:col-span-2 rounded-xl bg-slate-800/50 border border-slate-700/60 p-6 flex flex-col justify-between">
           <div class="space-y-4">
             <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider border-b border-slate-700/50 pb-2">
-         Weather Updates
+               Weather Details
             </h3>
-            <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs text-slate-400 space-y-2">
-              <p class="text-emerald-500">Connected to weather provider</p>
-              <p id="telemetry-log">Waiting for latest forecast data...</p>
+            <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs text-slate-400">
+               <div class="space-y-3">
+                  <div class="flex justify-between border-b border-slate-900 pb-1">
+                    <span class="text-slate-500">Humidity</span>
+                    <span id="weather-humidity" class="text-slate-200 font-semibold">45%</span>
+                  </div>
+                  <div class="flex justify-between border-b border-slate-900 pb-1">
+                    <span class="text-slate-500">Pressure</span>
+                    <span id="weather-pressure" class="text-slate-200 font-semibold">1015 hPa</span>
+                  </div>
+                  <div class="flex justify-between border-b border-slate-900 pb-1">
+                    <span class="text-slate-500">Feels Like</span>
+                    <span id="weather-feels" class="text-slate-200 font-semibold">26°C</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-500">Visibility</span>
+                    <span id="weather-visibility" class="text-slate-200 font-semibold">10km</span>
+                  </div>
+              </div>
             </div>
           </div>
           
           <div class="text-right pt-4">
             <button id="sync-weather-btn" class="px-4 py-2 bg-slate-900 hover:bg-slate-700 text-slate-300 font-mono text-xs font-semibold rounded-lg border border-slate-700/80 transition cursor-pointer">
-              EXECUTE_LIVE_FETCH
+              Execute-Fetch
             </button>
           </div>
         </div>
-
       </div>
+
+      <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-6 space-y-4">
+         <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider border-b border-slate-700/50 pb-2">
+            Weekly Forecast Block Arrays
+         </h3>
+
+         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+             
+             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
+                 <span class="font-bold text-sm text-slate-300">Mon</span>
+                 <div class="text-2xl">☀️</div>
+                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
+             </div>
+             
+             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
+                 <span class="font-bold text-sm text-slate-300">Tue</span>
+                 <div class="text-2xl">🌤️</div>
+                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
+             </div>
+             
+             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
+                 <span class="font-bold text-sm text-slate-300">Wed</span>
+                 <div class="text-2xl">🌧️</div>
+                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
+             </div>
+             
+             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
+                 <span class="font-bold text-sm text-slate-300">Thu</span>
+                 <div class="text-2xl">☁️</div>
+                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
+             </div>
+             
+             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
+                 <span class="font-bold text-sm text-slate-300">Fri</span>
+                 <div class="text-2xl">☀️</div>
+                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
+             </div>
+
+         </div>
+      </div>
+
     </div>
   </div>
-  
-  
-  
   `;
 }
