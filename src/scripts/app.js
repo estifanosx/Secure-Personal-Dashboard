@@ -29,18 +29,27 @@ document.querySelectorAll("button").forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     let loadPage = btn.dataset.page;
-    if (loadPage === "Dashboard") {
-      renderDashboard();
-    } else if (loadPage == "tasks") {
-      renderTasks();
-    } else if (loadPage === "notes") {
-      renderNotesPage();
-    } else if (loadPage === "expenses") {
-      renderexpensesPage();
-    } else if (loadPage === "weather") {
-      renderWeatherPage();
-    } else if (loadPage === "password vault") {
-      renderPasswordVault();
+    switch (loadPage) {
+      case "Dashboard":
+        renderDashboard();
+        break;
+      case "tasks":
+        renderTasks();
+        break;
+      case "notes":
+        renderNotesPage();
+        break;
+      case "expenses":
+        renderexpensesPage();
+        break;
+      case "weather":
+        renderWeatherPage();
+        break;
+      case "password vault":
+        renderPasswordVault();
+        break;
+      default:
+        renderDashboard();
     }
   });
 });
