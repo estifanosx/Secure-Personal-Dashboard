@@ -120,4 +120,21 @@ export function renderDashboard() {
         </li>`,
     )
     .join("");
+
+    const recentExpenseContiner = document.getElementById("recent-expense")
+     let recentexpense = expense.slice(-3).reverse()
+     recentExpenseContiner.innerHTML = recentexpense.map(
+       (items) =>
+         `<li class="flex items-center justify-between p-2 rounded-lg bg-slate-800/40 border border-slate-700/30 hover:bg-slate-800/80 transition min-w-0 gap-3">
+          <span class="text-xs font-medium text-slate-300 truncate max-w-[70%]">
+            ${items.Description}
+          </span>
+           <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded shrink-0">
+            ${items.Amount}
+          </span>
+          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded shrink-0">
+            ${items.Date}
+          </span>
+        </li>`,
+     ).join("")
 }
