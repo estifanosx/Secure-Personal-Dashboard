@@ -8,6 +8,9 @@
 - password Vault
 - dashboard
 - Expense Tracker
+
+- Dark Mode
+
 - Local Storage Persistence
 
 ## Technologies
@@ -17,9 +20,7 @@
 - JavaScript
 - Vite
 
-## Screenshots
 
-<img width="404" height="459" alt="image" src="https://github.com/user-attachments/assets/76c7a889-540c-411b-a528-3d8868b8632a" />
 
 
 ## Installation
@@ -31,4 +32,7 @@ npm run dev
 
 - Authentication
 - Backend API
+
 - Database
+- Database
+
