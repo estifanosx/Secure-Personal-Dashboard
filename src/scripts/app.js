@@ -2,7 +2,8 @@
 import { renderTasks } from "./tasks.js";
 import { renderNotesPage } from "./notes.js";
 import { renderexpensesPage } from "./expensess.js";
-import { renderWeatherPage } from "./weather.js"
+import { renderWeatherPage } from "./weather.js";
+import { renderPasswordVault } from "./passwordVault.js";
 
 // listineing the toggle bar
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,9 +34,10 @@ document.querySelectorAll("button").forEach((btn) => {
       renderNotesPage();
     } else if (loadPage === "expenses") {
       renderexpensesPage();
-    }
-    else if (loadPage === "weather") {
+    } else if (loadPage === "weather") {
       renderWeatherPage();
+    } else if (loadPage === "password vault") {
+      renderPasswordVault();
     }
   });
 });
