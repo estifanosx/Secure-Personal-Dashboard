@@ -1,7 +1,9 @@
+const lat = 9.145;
+const lon = 40.4897;
+
 export function renderWeatherPage() {
   // FIX 1: Mount directly to the unified root app shell container
   const container = document.querySelector(".stat-cards");
-
 
   container.innerHTML = `
   <div class="min-h-screen bg-slate-900 text-white antialiased">
@@ -19,23 +21,23 @@ export function renderWeatherPage() {
             <div class="flex items-center justify-between">
               <div>
                 <h2 id="weather-city" class="text-2xl font-bold tracking-tight">Neo-Tokyo, JP</h2>
-                <p id="weather-condition" class="text-xs text-slate-400 font-mono tracking-wider uppercase">Fetching weather data...</p>
+                <p id="weather-condition" class="text-xs text-slate-400 font-mono tracking-wider uppercase">Fetching weather data</p>
               </div>
               <div id="weather-icon-slot" class="text-4xl">⏳</div>
             </div>
             <div class="py-4">
-              <span id="weather-temp" class="text-6xl font-black tracking-tighter text-emerald-400">--°C</span>
+              <span id="weather-temp" class="text-6xl font-black tracking-tighter text-emerald-400">°C</span>
             </div>
           </div>
           
           <div class="grid grid-cols-2 gap-2 border-t border-slate-700/50 pt-4 text-center">
             <div>
               <p class="text-[10px] uppercase font-semibold text-slate-500">Wind Speed</p>
-              <p id="weather-wind" class="text-sm font-bold text-slate-200">--</p>
+              <p id="weather-wind" class="text-sm font-bold text-slate-200"></p>
             </div>
             <div>
               <p class="text-[10px] uppercase font-semibold text-slate-500">Wind Direction</p>
-              <p id="weather-wind-dir" class="text-sm font-bold text-slate-200">--</p>
+              <p id="weather-wind-dir" class="text-sm font-bold text-slate-200"></p>
             </div>
           </div>
         </div>
@@ -118,4 +120,45 @@ export function renderWeatherPage() {
     </div>
   </div>
   `;
+
+  document.getElementById("weather-condition");
+  document.getElementById("weather-icon-slot");
+
+
+  document.getElementById("weather-humidity");
+  document.getElementById("weather-pressure");
+  document.getElementById("weather-feels");
+  document.getElementById("weather-visibility");
+
+  document.getElementById("sync-weather-btn").addEventListener("click", () => {
+    async function fetchWeather() {
+      const btn = document.getElementById("sync-weather-btn");
+      btn.textContent = "FETCHING...";
+
+      try {
+        const response = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
+        );
+        const data = await response.json();
+        console.log("Live API Payload:", data);
+
+
+
+     const current = data.current_weather;
+
+        document.getElementById("weather-temp").textContent =
+          `${current.temperature}°C`;
+        document.getElementById("weather-wind").textContent =
+          `${current.windspeed}Km/h`;
+            document.getElementById("weather-wind-dir").textContent =
+              `${current.winddirection}`;
+      } 
+      catch(error) {
+      console.log("fetch error" , error)
+      }finally {
+        btn.textContent = `Execute-Fetch`;
+      }
+    }
+    fetchWeather();
+  });
 }
