@@ -1,3 +1,5 @@
+
+
 export function renderPasswordVault() {
   const container = document.querySelector(".stat-cards");
   container.innerHTML = `
@@ -33,6 +35,7 @@ export function renderPasswordVault() {
           <tr class="border-b border-slate-700 text-slate-400 text-xs font-mono">
             <th class="pb-2 font-semibold">Description</th>
             <th class="pb-2 font-semibold"> Password</th>
+            <th class="pb-2 font-semibold">Action</th>
      
           </tr>
         </thead>
@@ -48,9 +51,20 @@ export function renderPasswordVault() {
 
   </div>
   `;
+  const savedata = document.getElementById("table-body");
   const Description = document.getElementById("pass-desc");
  const passInput = document.getElementById("password-input");
-  document.getElementById("save-btn").addEventListener("click" ,() => {
-         
+  const btn = document.getElementById("save-btn").addEventListener("click" ,() => {
+      
+        
+
+ const password = {
+      id: Date.now(),
+      decription: Description.value ,
+      pIn :passInput.value
+    };
+    console.log(password.description)
+    console.log(password.id)
+    console.log(password.pIn)
   })
 }
