@@ -7,6 +7,7 @@
 - Notes dashboard
 - password Vault
 - dashboard
+- Expense Tracker
 - Local Storage Persistence
 
 ## Technologies
