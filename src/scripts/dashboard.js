@@ -80,9 +80,33 @@ export function renderDashboard() {
 
          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <!-- weather stat card  -->
-            <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-              <h2 class="font-semibold">Weather Today</h2>
-            </div>
+            <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-3">
+      <div class="flex justify-between items-center">
+        <h2 class="font-semibold text-slate-200">Weather Today</h2>
+        <span class="text-xl font-bold text-emerald-400">${savedTemp  || ""}°C</span>
+      </div>
+
+      <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs text-slate-400">
+        <div class="space-y-3">
+          <div class="flex justify-between border-b border-slate-900 pb-1">
+            <span class="text-slate-500">Humidity</span>
+            <span class="text-slate-200 font-semibold">${savedHumidity || ""}% </span>
+          </div>
+          <div class="flex justify-between border-b border-slate-900 pb-1">
+            <span class="text-slate-500">Pressure</span>
+            <span class="text-slate-200 font-semibold">${savedPressure || ""} hPa</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-900 pb-1">
+            <span class="text-slate-500">Feels Like</span>
+            <span class="text-slate-200 font-semibold">${savedFeels || ""}°C</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Visibility</span>
+            <span class="text-slate-200 font-semibold">${savedVisibility || ""} Km</span>
+          </div>
+    </div>
+  </div>
+</div>
 
             <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
              <h2 class="font-semibold text-slate-200 mb-3 flex items-center gap-2"> Recent Tasks </h2>

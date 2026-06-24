@@ -28,7 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelectorAll("button").forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
-    let loadPage = btn.dataset.page;
+
+
+    let loadPage = btn.dataset.page
     switch (loadPage) {
       case "Dashboard":
         renderDashboard();
@@ -53,3 +55,4 @@ document.querySelectorAll("button").forEach((btn) => {
     }
   });
 });
+renderDashboard();
