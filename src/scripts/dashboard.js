@@ -5,6 +5,11 @@ export function renderDashboard() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const expense = JSON.parse(localStorage.getItem("expense")) || [];
   const passwords = JSON.parse(localStorage.getItem("password")) || [];
+  const savedTemp = localStorage.getItem("dash-temp");
+  const savedHumidity = localStorage.getItem("dash-humidity");
+  const savedPressure = localStorage.getItem("dash-pressure");
+  const savedFeels = localStorage.getItem("dash-feels");
+  const savedVisibility = localStorage.getItem("dash-visibility");
   let totalExpense = expense.reduce(
     (accumulator, expense) => accumulator + Number(expense.Amount || 0),
     0,
@@ -145,7 +150,7 @@ export function renderDashboard() {
 
   const recentTasksContainer = document.getElementById("recent-tasks");
   const recentTasks = tasks.slice(-3).reverse();
-  console.log(renderTasks)
+  console.log(renderTasks);
 
   recentTasksContainer.innerHTML = recentTasks
     .map(
