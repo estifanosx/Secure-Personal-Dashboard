@@ -88,11 +88,36 @@ export function renderDashboard() {
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <!-- notes stat card  -->
             <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-              <h2 class="font-semibold">Recent Notes</h2>
+             <h2 class="font-semibold text-slate-200 mb-3 flex items-center gap-2">
+          Recent Notes
+        </h2>
+        <ul id="recent-notes" class="space-y-2"></ul>
             </div>
 
+
+            <!-- expense stat cards -->
             <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-              <h2 class="font-semibold">Expenses Overview</h2>
+              <h2 class="font-semibold text-slate-200 mb-3 flex items-center gap-2 ">Expenses Overview</h2>
+        <ul id="recent-expense" class="space-y-2"></ul>
+
             </div>
           </div>`;
+
+  const recentNotesContainer = document.getElementById("recent-notes");
+
+  const recentnotes = notes.slice(-3).reverse();
+  console.log(recentnotes);
+  recentNotesContainer.innerHTML = recentnotes
+    .map(
+      (items) =>
+        `<li class="flex items-center justify-between p-2 rounded-lg bg-slate-800/40 border border-slate-700/30 hover:bg-slate-800/80 transition min-w-0 gap-3">
+          <span class="text-xs font-medium text-slate-300 truncate max-w-[70%]">
+            ${items.title}
+          </span>
+          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded shrink-0">
+            ${items.Date}
+          </span>
+        </li>`,
+    )
+    .join("");
 }
