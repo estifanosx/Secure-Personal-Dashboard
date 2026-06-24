@@ -111,6 +111,17 @@ export function renderWeatherPage() {
           `${current.temperature_2m}°C`;
         document.getElementById("weather-visibility").textContent =
           `${(current.visibility / 1000).toFixed(1)} Km`;
+
+
+
+          localStorage.setItem("dash-temp", current.temperature_2m);
+          localStorage.setItem("dash-humidity", current.relative_humidity_2m);
+          localStorage.setItem("dash-pressure", current.pressure_msl);
+          localStorage.setItem("dash-feels", current.temperature_2m);
+          localStorage.setItem(
+            "dash-visibility",
+            (current.visibility / 1000).toFixed(1),
+          );
       } catch (error) {
         console.log("fetch error", error);
       } finally {
