@@ -1,3 +1,5 @@
+import { renderTasks } from "./tasks";
+
 export function renderDashboard() {
   const notes = JSON.parse(localStorage.getItem("notes")) || [];
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -78,7 +80,8 @@ export function renderDashboard() {
             </div>
 
             <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl">
-              <h2 class="font-semibold">Recent Tasks</h2>
+             <h2 class="font-semibold text-slate-200 mb-3 flex items-center gap-2"> Recent Tasks </h2>
+        <ul id="recent-tasks" class="space-y-2"></ul>
             </div>
          </div>
          
@@ -121,11 +124,12 @@ export function renderDashboard() {
     )
     .join("");
 
-    const recentExpenseContiner = document.getElementById("recent-expense")
-     let recentexpense = expense.slice(-3).reverse()
-     recentExpenseContiner.innerHTML = recentexpense.map(
-       (items) =>
-         `<li class="flex items-center justify-between p-2 rounded-lg bg-slate-800/40 border border-slate-700/30 hover:bg-slate-800/80 transition min-w-0 gap-3">
+  const recentExpenseContiner = document.getElementById("recent-expense");
+  let recentexpense = expense.slice(-3).reverse();
+  recentExpenseContiner.innerHTML = recentexpense
+    .map(
+      (items) =>
+        `<li class="flex items-center justify-between p-2 rounded-lg bg-slate-800/40 border border-slate-700/30 hover:bg-slate-800/80 transition min-w-0 gap-3">
           <span class="text-xs font-medium text-slate-300 truncate max-w-[70%]">
             ${items.Description}
           </span>
@@ -136,5 +140,27 @@ export function renderDashboard() {
             ${items.Date}
           </span>
         </li>`,
-     ).join("")
+    )
+    .join("");
+
+  const recentTasksContainer = document.getElementById("recent-tasks");
+  const recentTasks = tasks.slice(-3).reverse();
+  console.log(renderTasks)
+
+  recentTasksContainer.innerHTML = recentTasks
+    .map(
+      (items) =>
+        `<li class="flex items-center justify-between p-2 rounded-lg bg-slate-800/40 border border-slate-700/30 hover:bg-slate-800/80 transition min-w-0 gap-3">
+          <span class="text-xs font-medium text-slate-300 truncate max-w-[70%]">
+            ${items.title}
+          </span>
+           <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded shrink-0">
+            ${items.priority}
+          </span>
+          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded shrink-0">
+            ${items.Date}
+          </span>
+        </li>`,
+    )
+    .join("");
 }
