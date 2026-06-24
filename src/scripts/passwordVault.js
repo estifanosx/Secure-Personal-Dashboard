@@ -1,5 +1,5 @@
 
-
+let passwordStore = []
 export function renderPasswordVault() {
   const container = document.querySelector(".stat-cards");
   container.innerHTML = `
@@ -63,8 +63,8 @@ export function renderPasswordVault() {
       decription: Description.value ,
       pIn :passInput.value
     };
-    console.log(password.description)
-    console.log(password.id)
-    console.log(password.pIn)
+    passwordStore.push(password)
+    console.log(password)
+   
   })
 }
