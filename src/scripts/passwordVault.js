@@ -35,36 +35,54 @@ export function renderPasswordVault() {
           <tr class="border-b border-slate-700 text-slate-400 text-xs font-mono">
             <th class="pb-2 font-semibold">Description</th>
             <th class="pb-2 font-semibold"> Password</th>
-            <th class="pb-2 font-semibold">Action</th>
-     
           </tr>
         </thead>
         <tbody id="table-body" class="divide-y divide-slate-700/40">
-          <tr>
-            <td class="py-4 text-slate-500 text-xs italic text-center" colspan="3">
-               
-            </td>
-          </tr>
+          
         </tbody>
       </table>
     </div>
 
   </div>
   `;
-  const savedata = document.getElementById("table-body");
+ const savedata = document.getElementById("table-body");
   const Description = document.getElementById("pass-desc");
- const passInput = document.getElementById("password-input");
-  const btn = document.getElementById("save-btn").addEventListener("click" ,() => {
-      
-        
+  const passInput = document.getElementById("password-input");
+  const saveBtn = document.getElementById("save-btn");
 
- const password = {
-      id: Date.now(),
-      decription: Description.value ,
-      pIn :passInput.value
+  if (!saveBtn) return;
+
+  saveBtn.addEventListener("click", () => {
+
+
+    const password = {
+      description: Description.value, 
+      pIn: passInput.value
     };
-    passwordStore.push(password)
-    console.log(password)
-   
-  })
+
+    passwordStore.push(password);
+    console.log("Current Application State Array:", passwordStore);
+
+
+    Description.value = "";
+    passInput.value = "";
+
+  
+    renderPassword(savedata); 
+  });
+}
+
+// FIXED: Receives target interface node container directly
+function renderPassword(targetContainer) {
+  if (!targetContainer) return;
+
+ 
+  targetContainer.innerHTML = passwordStore.map((item) => {
+    return `
+      <tr class="border-b border-slate-800 hover:bg-slate-800/30">
+        <td class="py-3 px-2 font-medium text-slate-200">${item.description}</td>
+        <td class="py-3 px-2 font-mono text-emerald-400 font-bold">${item.pIn}</td>
+      </tr>
+    `;
+  }).join("");
 }
