@@ -20,7 +20,7 @@ export function renderWeatherPage() {
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <div>
-                <h2 id="weather-city" class="text-2xl font-bold tracking-tight">Neo-Tokyo, JP</h2>
+                <h2 id="weather-city" class="text-2xl font-bold tracking-tight pb-2">Addis Ababa , Ethiopia</h2>
                 <p id="weather-condition" class="text-xs text-slate-400 font-mono tracking-wider uppercase">Fetching weather data</p>
               </div>
               <div id="weather-icon-slot" class="text-4xl">⏳</div>
@@ -51,19 +51,19 @@ export function renderWeatherPage() {
                <div class="space-y-3">
                   <div class="flex justify-between border-b border-slate-900 pb-1">
                     <span class="text-slate-500">Humidity</span>
-                    <span id="weather-humidity" class="text-slate-200 font-semibold">45%</span>
+                    <span id="weather-humidity" class="text-slate-200 font-semibold"></span>
                   </div>
                   <div class="flex justify-between border-b border-slate-900 pb-1">
                     <span class="text-slate-500">Pressure</span>
-                    <span id="weather-pressure" class="text-slate-200 font-semibold">1015 hPa</span>
+                    <span id="weather-pressure" class="text-slate-200 font-semibold"></span>
                   </div>
                   <div class="flex justify-between border-b border-slate-900 pb-1">
                     <span class="text-slate-500">Feels Like</span>
-                    <span id="weather-feels" class="text-slate-200 font-semibold">26°C</span>
+                    <span id="weather-feels" class="text-slate-200 font-semibold"></span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-slate-500">Visibility</span>
-                    <span id="weather-visibility" class="text-slate-200 font-semibold">10km</span>
+                    <span id="weather-visibility" class="text-slate-200 font-semibold"></span>
                   </div>
               </div>
             </div>
@@ -76,47 +76,6 @@ export function renderWeatherPage() {
           </div>
         </div>
       </div>
-
-      <div class="rounded-xl bg-slate-800/50 border border-slate-700/60 p-6 space-y-4">
-         <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider border-b border-slate-700/50 pb-2">
-            Weekly Forecast Block Arrays
-         </h3>
-
-         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-             
-             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
-                 <span class="font-bold text-sm text-slate-300">Mon</span>
-                 <div class="text-2xl">☀️</div>
-                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
-             </div>
-             
-             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
-                 <span class="font-bold text-sm text-slate-300">Tue</span>
-                 <div class="text-2xl">🌤️</div>
-                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
-             </div>
-             
-             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
-                 <span class="font-bold text-sm text-slate-300">Wed</span>
-                 <div class="text-2xl">🌧️</div>
-                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
-             </div>
-             
-             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
-                 <span class="font-bold text-sm text-slate-300">Thu</span>
-                 <div class="text-2xl">☁️</div>
-                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
-             </div>
-             
-             <div class="flex flex-col items-center justify-between p-3 bg-slate-900/40 border border-slate-800 rounded-xl space-y-2">
-                 <span class="font-bold text-sm text-slate-300">Fri</span>
-                 <div class="text-2xl">☀️</div>
-                 <p class="font-mono text-sm font-bold text-emerald-400">24°C</p>
-             </div>
-
-         </div>
-      </div>
-
     </div>
   </div>
   `;
@@ -124,38 +83,37 @@ export function renderWeatherPage() {
   document.getElementById("weather-condition");
   document.getElementById("weather-icon-slot");
 
-
-  document.getElementById("weather-humidity");
-  document.getElementById("weather-pressure");
-  document.getElementById("weather-feels");
-  document.getElementById("weather-visibility");
-
   document.getElementById("sync-weather-btn").addEventListener("click", () => {
     async function fetchWeather() {
       const btn = document.getElementById("sync-weather-btn");
       btn.textContent = "FETCHING...";
-
       try {
         const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,wind_direction_10m,weather_code,relative_humidity_2m,visibility,pressure_msl`,
         );
         const data = await response.json();
-        console.log("Live API Payload:", data);
-
-
-
-     const current = data.current_weather;
-
+        const current = data.current;
         document.getElementById("weather-temp").textContent =
-          `${current.temperature}°C`;
+          `${current.temperature_2m}°C`;
+
         document.getElementById("weather-wind").textContent =
-          `${current.windspeed}Km/h`;
-            document.getElementById("weather-wind-dir").textContent =
-              `${current.winddirection}`;
-      } 
-      catch(error) {
-      console.log("fetch error" , error)
-      }finally {
+          `${current.wind_speed_10m} Km/h`;
+
+        document.getElementById("weather-wind-dir").textContent =
+          `${current.wind_direction_10m}°`;
+
+        document.getElementById("weather-humidity").textContent =
+          `${current.relative_humidity_2m}%`;
+
+        document.getElementById("weather-pressure").textContent =
+          `${current.pressure_msl} hPa`;
+        document.getElementById("weather-feels").textContent =
+          `${current.temperature_2m}°C`;
+        document.getElementById("weather-visibility").textContent =
+          `${(current.visibility / 1000).toFixed(1)} Km`;
+      } catch (error) {
+        console.log("fetch error", error);
+      } finally {
         btn.textContent = `Execute-Fetch`;
       }
     }
