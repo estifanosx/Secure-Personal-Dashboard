@@ -1,5 +1,4 @@
-
-let passwordStore = []
+let passwordStore = JSON.parse(localStorage.getItem("password")) || [];
 export function renderPasswordVault() {
   const container = document.querySelector(".stat-cards");
   container.innerHTML = `
@@ -45,7 +44,7 @@ export function renderPasswordVault() {
 
   </div>
   `;
- const savedata = document.getElementById("table-body");
+  const savedata = document.getElementById("table-body");
   const Description = document.getElementById("pass-desc");
   const passInput = document.getElementById("password-input");
   const saveBtn = document.getElementById("save-btn");
@@ -53,22 +52,19 @@ export function renderPasswordVault() {
   if (!saveBtn) return;
 
   saveBtn.addEventListener("click", () => {
-
-
     const password = {
-      description: Description.value, 
-      pIn: passInput.value
+      description: Description.value,
+      pIn: passInput.value,
     };
 
     passwordStore.push(password);
     console.log("Current Application State Array:", passwordStore);
 
-
     Description.value = "";
     passInput.value = "";
 
-  
-    renderPassword(savedata); 
+    renderPassword(savedata);
+   savetoLocalStorage(); 
   });
 }
 
@@ -76,13 +72,19 @@ export function renderPasswordVault() {
 function renderPassword(targetContainer) {
   if (!targetContainer) return;
 
- 
-  targetContainer.innerHTML = passwordStore.map((item) => {
-    return `
+  targetContainer.innerHTML = passwordStore
+    .map((item) => {
+      return `
       <tr class="border-b border-slate-800 hover:bg-slate-800/30">
         <td class="py-3 px-2 font-medium text-slate-200">${item.description}</td>
         <td class="py-3 px-2 font-mono text-emerald-400 font-bold">${item.pIn}</td>
       </tr>
     `;
-  }).join("");
+    })
+    .join("");
+savetoLocalStorage(); 
+}
+
+function savetoLocalStorage() {
+  localStorage.setItem("password", JSON.stringify(passwordStore));
 }
