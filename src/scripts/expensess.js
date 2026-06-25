@@ -218,8 +218,9 @@ function updateStatCards() {
     return accumulator + Number(expense.Amount);
   }, 0);
 
-  let averageExpense = totalExpense / storeExpenses.length;
+  let averageExpense = (totalExpense / storeExpenses.length) || 0;
 
+     
   const largestExpense = storeExpenses.reduce((largest, expense) => {
     return Math.max(largest, Number(expense.Amount));
   }, 0);
