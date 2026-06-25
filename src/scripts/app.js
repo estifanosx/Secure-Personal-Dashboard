@@ -29,8 +29,7 @@ document.querySelectorAll("button").forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
 
-
-    let loadPage = btn.dataset.page
+    let loadPage = btn.dataset.page;
     switch (loadPage) {
       case "Dashboard":
         renderDashboard();
@@ -50,8 +49,6 @@ document.querySelectorAll("button").forEach((btn) => {
       case "password vault":
         renderPasswordVault();
         break;
-      default:
-        renderDashboard();
     }
   });
 });
